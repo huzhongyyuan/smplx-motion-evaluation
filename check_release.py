@@ -8,4 +8,5 @@ ROOT=Path(__file__).resolve().parent
 if __name__=='__main__':
     raise SystemExit(subprocess.call([sys.executable,'-m','unittest','-v',
         'test_contracts','test_aist30','test_hml_sources','test_metric_transport','test_hml_time',
-        'test_release_metadata','test_beat_report','test_gt_results','test_current_protocols'],cwd=ROOT))
+        'test_release_metadata','test_beat_report','test_gt_results','test_current_protocols',
+        'test_corrected_kinetic'],cwd=ROOT))

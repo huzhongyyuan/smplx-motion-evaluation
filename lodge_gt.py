@@ -11,6 +11,7 @@ import numpy as np
 from contracts import require
 from evaluator_common import ROOT, UP, setup, load_file, write_json
 from source_lock import sha
+from metric_issues import known_issues
 
 
 def verify_reference(root):
@@ -47,6 +48,7 @@ def main():
     # Identity on the published pool: no motion re-extraction or new equations.
     scores = metric.quantized_metrics(str(reference), str(reference))
     result = dict(status='SCORER_RUN_FINISHED', dataset='FineDance', samples=202,
+        known_metric_issues=known_issues('FineDance'),
         profile='lodge_published202_gt', scope='author published feature pool, not TEST19',
         metrics=dict(Divk=scores['div_k_gt'], Divg=scores['div_m_gt']),
         identity_diagnostic=scores, paper_gt_fid=None,

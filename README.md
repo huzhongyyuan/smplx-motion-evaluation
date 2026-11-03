@@ -4,6 +4,8 @@
 
 完整中文说明：[数据集评测说明.md](数据集评测说明.md)。数据获取：[docs/DATA_ACCESS.md](docs/DATA_ACCESS.md)。第三方条款：[THIRD_PARTY.md](THIRD_PARTY.md)。
 
+**2026-11-03指标修正：** LODGE/Bailando的原版加速度特征存在括号错误；修正版由`evaluate.py corrected-kinetic`进入，两端重新提特征，不能与论文数字或旧GT特征混算。BEAT2已隔离旧L1的数组副作用，并增加未改写动作、对齐阈值索引的BC诊断。原论文兼容结果保留并标注问题。详见[修正说明](docs/METRIC_CORRECTIONS.md)。SOMA往返质量仍须单独验收。
+
 **每个数据集只有一个当前评测协议。** 四套入口与已报告GT一一对应，命令、结果分支、成员名单和结果SHA见[GT脚本索引](docs/GT_RECIPES.md)及机器可读的[gt_index.json](results/gt_index.json)。验证范围见[VALIDATION.md](VALIDATION.md)。表中数值均为GT评测；SOMA/Tokenizer往返另验。旧BEAT2公开版、AIST++的SMPL对照和旧发布回执已归档到[legacy](legacy/README.md)，不参与当前评分或报告。
 
 ## 表示与主指标
@@ -67,7 +69,7 @@ python evaluate.py gt --dataset BEAT2 --output runs/beat2024_gt15
 | BEAT2 EMAGE2024兼容speaker2 TEST15 | BC raw0.686717（×10为6.867171）、L1div13.070166 | 用户接受近似复现；不含旧版FGD |
 | HumanML3D作者20 FPS TEST4198，20次 | R@1/2/3 0.512672/0.702338/0.797683；FID0.001632；Matching2.971407；Div9.550798 | 最终20轮，95%CI与每轮结果已归档 |
 
-同协议补充诊断：AIST++的TEST20＋VAL20为40条，FineDance的loader有效TEST为19条；这些是样本集合差别，不是另一套打分版本。数值与成员范围见[中文说明](数据集评测说明.md)。当前36项核心回归＋3项作者资产回归通过，AIST真实3源与FineDance真实2源迁移控制一致，见[验证记录](VALIDATION.md)。舞蹈FID若有微小复数，完整JSON保留实虚部。分数接近不等于完整协议复现。原生GT打分、转换保真、重建质量、生成能力分别验收。
+同协议补充诊断：AIST++的TEST20＋VAL20为40条，FineDance的loader有效TEST为19条；这些是样本集合差别，不是另一套打分版本。数值与成员范围见[中文说明](数据集评测说明.md)。核心回归、作者资产回归及真实输入控制的版本和范围见[验证记录](VALIDATION.md)。舞蹈FID若有微小复数，完整JSON保留实虚部。分数接近不等于完整协议复现。原生GT打分、转换保真、重建质量、生成能力分别验收。
 
 ## 仓库内容与许可
 

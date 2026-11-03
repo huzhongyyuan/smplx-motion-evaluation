@@ -39,18 +39,38 @@ def old_support(pose_frames, audio_samples, face_frames):
     return loader, generated
 
 
+def corrected_motion_beats(position, start, end, fps, normalizer):
+    """Independent diagnostic: original positions and aligned threshold indices."""
+    from scipy.signal import argrelextrema
+    x = np.asarray(position).reshape(len(position), -1, 3)
+    velocity = np.empty_like(x)
+    velocity[0] = (x[1]-x[0])*fps
+    velocity[-1] = (x[-1]-x[-2])*fps
+    velocity[1:-1] = (x[2:]-x[:-2])*(fps/2)
+    speed = np.linalg.norm(velocity, axis=2)/normalizer
+    cropped = speed[start:end]
+    return [indices[cropped[indices, joint] > .3]
+            for joint in range(speed.shape[1])
+            for indices in [argrelextrema(cropped[:, joint], np.less, order=7)[0]]]
+
+
 def score_positions(metric, l1, position, wave, normalizer):
-    """Preserve the old shared-array order, including L1's in-place mutation."""
+    """Reproduce historical scores privately; never mutate the caller's motion."""
     n = len(position)
     before_sum, before_count = l1.sum, l1.counter
-    l1.run(position)
+    historical_position = position.copy()
+    l1.run(historical_position)
     bc = metric.alignment(.3, 7, mmae=normalizer)
     onset = bc.load_audio(wave[:int(16000/30*n)], 32000, len(wave)-32000, True)
     require(len(onset) > 0, 'No historical BC speech onsets')
-    beats = bc.load_pose(position, 60, n-60, 30, True)
+    beats = bc.load_pose(historical_position, 60, n-60, 30, True)
     value = bc.calculate_align(onset, beats, 30)
     require(np.isfinite(value) and 0 <= value <= 1, 'Invalid historical raw BC')
+    corrected_beats = corrected_motion_beats(position, 60, n-60, 30, normalizer)
+    corrected_bc = bc.calculate_align(onset, corrected_beats, 30)
+    require(np.isfinite(corrected_bc) and 0 <= corrected_bc <= 1, 'Invalid independent BC diagnostic')
     return dict(BC=float(value), L1div=float((l1.sum-before_sum)/(l1.counter-before_count)),
+                BC_unmutated_aligned_threshold=float(corrected_bc),
                 frames=n, bc_frames=n-120, audio_onsets=len(onset),
                 motion_beats=sum(len(b) for b in beats))
 
@@ -68,6 +88,7 @@ def run(args, rows):
     normalizer = np.load(ASSETS/'mean_vel_smplxflame_30.npy', allow_pickle=False)
     l1 = metric.L1div()
     bc_sum, bc_count, cases = 0., 0, []
+    corrected_bc_sum = 0.
     for row in rows:
         gt, _, betas = load_smplx(row['native_path'], 30)
         require(betas is not None and np.asarray(betas).shape == (300,), 'Legacy caller requires native300 betas')
@@ -98,6 +119,7 @@ def run(args, rows):
         position = np.concatenate(position).reshape(full_length, 165)[:n].copy()
         scores = score_positions(metric, l1, position, wave, normalizer)
         bc_sum += scores['BC']*scores['bc_frames']
+        corrected_bc_sum += scores['BC_unmutated_aligned_threshold']*scores['bc_frames']
         bc_count += scores['bc_frames']
         cases.append(dict(source_id=row['source_id'], native_frames=len(gt), old_loader_frames=loader,
             native_sha256=sha(row['native_path']), audio_sha256=sha(row['audio_path']),
@@ -113,4 +135,7 @@ def run(args, rows):
         evaluated_joints='55 local SMPL-X joints; body+hands; no separate face metric or GT filling',
         paper_reproduction=False,
         scope='Pinned historical caller compatibility; accepted approximate reproduction, not exact paper identity',
-        historical_behavior='L1div mutates shared positions before BC, as in the2024 caller; no score-based tuning')
+        historical_behavior='Historical L1 mutation is isolated in a private copy; BC/L1 compatibility values are unchanged',
+        diagnostics=dict(BC_unmutated_aligned_threshold=corrected_bc_sum/bc_count,
+            profile='emage2024_unmutated_aligned_threshold_v1', paper_comparable=False,
+            changes='BC reads original positions; velocity threshold and beat minima use the same cropped frame indices'))

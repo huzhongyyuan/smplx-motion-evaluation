@@ -8,7 +8,8 @@ ROOT = Path(__file__).resolve().parent
 COMMANDS = dict(configure='configure.py', fetch='fetch_upstream.py', check='check_release.py',
                 score='score_worker.py', adapt='adapters.py', plan='hml_plan.py',
                 report='report.py', gt='gt.py', **{'lodge-gt':'lodge_gt.py',
-                'prepare-beat2024':'prepare_beat2024.py','aist-smplx':'aist_smplx.py','hml-time':'hml_time_probe.py'})
+                'prepare-beat2024':'prepare_beat2024.py','aist-smplx':'aist_smplx.py','hml-time':'hml_time_probe.py',
+                'corrected-kinetic':'corrected_kinetic.py'})
 
 def main():
     if len(sys.argv)<2 or sys.argv[1] not in COMMANDS:

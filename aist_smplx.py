@@ -13,6 +13,7 @@ from aist30 import features,protocol
 from contracts import read_manifest,require,load_smplx
 from evaluator_common import ROOT,UP,setup,smpl_male,load_file,write_json
 from source_lock import sha
+from metric_issues import known_issues
 
 KINDS=('kinetic_features','manual_features_new')
 MAP24=list(range(22))+[28,43]
@@ -91,6 +92,7 @@ def main():
         for role in ('test20','eval40'):
             scores[domain+'_'+role+'_vs_train952']=metric.quantized_metrics(str(out/domain/role),str(out/('smplx' if domain=='candidate' else domain)/'train952'))
     write_json(out/'result.json',dict(status='SCORER_RUN_FINISHED',verified_at=datetime.now(timezone.utc).isoformat(),
+        known_metric_issues=known_issues('AIST++'),
         protocol=dict(time=protocol(),joint_map=MAP24,reference='TRAIN952 only',shape='zero20',hands='default',
                       published_smpl60_score_comparable=False),metrics=scores,sources=records,formal_official_result=False))
 

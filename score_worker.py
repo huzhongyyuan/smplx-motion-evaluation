@@ -15,6 +15,7 @@ import torch
 from evaluator_common import ROOT, UP, setup, load_file, cwd, cpu_checkpoint_loading, write_json
 from source_lock import sha
 from contracts import require
+from metric_issues import known_issues
 
 def dance(args, rows):
     require(args.dataset == 'FineDance', 'Use aist-smplx for AIST++ SMPL-X30 scoring')
@@ -213,7 +214,7 @@ def main():
     for name in ('PROTOCOL.md', 'sources.lock.json', 'assets.lock.json'):
         shutil.copy2(ROOT/name, args.output/name)
     code_paths = [ROOT/name for name in ('score_worker.py', 'contracts.py', 'evaluator_common.py',
-                  'official_preprocess.py', 'hml_generated.py', 'hml_sources.py', 'test_protocol.py', 'aist30.py', 'evaluate.py', 'source_lock.py', 'assets_lock.py')]
+        'official_preprocess.py', 'hml_generated.py', 'hml_sources.py', 'test_protocol.py', 'aist30.py', 'evaluate.py', 'source_lock.py', 'assets_lock.py', 'metric_issues.py')]
     if args.dataset == 'BEAT2':
         code_paths.append(ROOT/'beat2024.py')
         from beat2024 import ASSETS
@@ -233,6 +234,7 @@ def main():
     try:
         result = humanml(args, rows) if args.dataset == 'HumanML3D' else beat(args, rows) if args.dataset == 'BEAT2' else dance(args, rows)
         result.update(dataset=args.dataset, arm=args.arm, split=args.split, samples=len(rows), status='SCORER_RUN_FINISHED',
+                      known_metric_issues=known_issues(args.dataset),
                       input_protocol=input_protocol,
                       formal_official_result=False, acceptance='scorer output only; source/paper protocol, full coverage and transform fidelity require separate acceptance')
         if args.dataset == 'BEAT2':

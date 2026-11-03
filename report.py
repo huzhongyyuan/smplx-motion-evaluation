@@ -7,6 +7,7 @@ import numpy as np
 from contracts import require
 from evaluator_common import write_json
 from source_lock import sha
+from metric_issues import known_issues
 
 
 def numeric(value):
@@ -58,6 +59,8 @@ def main():
             seed=run['arguments'].get('seed',112),replications=run['arguments'].get('replications',20),
             formal_official_result=False,quality_acceptance='PENDING')
         row['input_protocol']=result.get('input_protocol')
+        row['known_metric_issues']=known_issues(result['dataset'])
+        row['diagnostics']=result.get('diagnostics')
         row['feature_protocol']=result.get('feature_protocol')
         row['beat_profile']=result.get('beat_profile')
         row['evaluation_group']=('native_'+row['split']+'_vs_independent_reference_diagnostic'
@@ -83,6 +86,7 @@ def main():
                                              code_sha256=sha(__file__),rows=rows))
     lines=['# 官方打分器结果与转换对照','',
         '以下按原始Run列出。TRAIN为诊断；完整TEST运行也需另验协议和转换保真，不能凭分数生成通过结论。', '',
+        '已知实现问题：LODGE/Bailando原版kinetic含加速度括号错误；FID-k不能直接解释为抖动。修正版physical_kinetic30_v1须两端重新提特征，不能混入本表。BEAT2兼容BC保留历史数组变换和阈值索引行为；BC_unmutated_aligned_threshold只作独立诊断。', '',
         '| 数据集 | split / arm | 源数 | 指标 | 证据 |','|---|---|---:|---|---|']
     def fmt(x):
         x=np.asarray(numeric(x))
