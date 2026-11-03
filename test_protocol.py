@@ -1,4 +1,4 @@
-"""Frozen official source membership; separates all265 and author speaker2 TEST15."""
+"""Frozen source membership; BEAT2 uses only the accepted author speaker2 protocol."""
 import json
 from pathlib import Path
 from contracts import read_manifest,require
@@ -7,6 +7,8 @@ from source_lock import sha
 
 def validate_test_protocol(args,rows):
     require(args.dataset!='AIST++','Use aist-smplx: actual SMPL-X geometry and TRAIN952 reference')
+    if args.dataset == 'BEAT2':
+        require(args.membership_profile == 'emage_author_speaker2', 'BEAT2 uses only the frozen speaker2 protocol')
     if args.split!='test': return dict(scope='TRAIN/VAL diagnostic; no formal TEST coverage claim')
     profile=getattr(args,'membership_profile','all_official_sources')
     require(profile in ('all_official_sources','emage_author_speaker2'),'Unknown profile')

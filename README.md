@@ -4,7 +4,7 @@
 
 完整中文说明：[数据集评测说明.md](数据集评测说明.md)。数据获取：[docs/DATA_ACCESS.md](docs/DATA_ACCESS.md)。第三方条款：[THIRD_PARTY.md](THIRD_PARTY.md)。
 
-四套入口与已报告GT一一对应，命令、结果分支、成员名单和结果SHA见[GT脚本索引](docs/GT_RECIPES.md)及机器可读的[gt_index.json](results/gt_index.json)。29项核心回归＋3项历史资产回归通过，FineDance202池和BEAT2 TEST15由公开入口复算一致，见[VALIDATION.md](VALIDATION.md)。表中数值均为GT评测；SOMA/Tokenizer往返另验。
+**每个数据集只有一个当前评测协议。** 四套入口与已报告GT一一对应，命令、结果分支、成员名单和结果SHA见[GT脚本索引](docs/GT_RECIPES.md)及机器可读的[gt_index.json](results/gt_index.json)。验证范围见[VALIDATION.md](VALIDATION.md)。表中数值均为GT评测；SOMA/Tokenizer往返另验。旧BEAT2公开版、AIST++的SMPL对照和旧发布回执已归档到[legacy](legacy/README.md)，不参与当前评分或报告。
 
 ## 表示与主指标
 
@@ -13,7 +13,7 @@
 | HumanML3D | 作者20 FPS/263D | T2M | body |
 | AIST++ | 真实SMPL-X30，固定24点 | Bailando公式＋显式30 FPS时间参数 | body；与SMPL60论文协议分开 |
 | FineDance | LODGE发布202源GT特征池；动作侧用原预处理/FK | LODGE原版 | body；TEST19诊断单列 |
-| BEAT2 | SMPL-X30 | EMAGE2024兼容BC/L1；新版FGD单列 | body＋hands |
+| BEAT2 | SMPL-X30、speaker2 TEST15 | 固定EMAGE2024兼容BC/L1 | body＋hands；当前协议不含FGD |
 
 **不是四库全都原生SMPL-X。** 只有BEAT2评手指；其他三库手指默认，保留手腕和手臂。
 
@@ -64,13 +64,10 @@ python evaluate.py gt --dataset BEAT2 --output runs/beat2024_gt15
 |---|---|---|
 | AIST++ SMPL-X30 TEST20 / TRAIN952 | FIDk28.568973、FIDg16.844502、Divk8.295857、Divg8.088570 | 30 FPS适配协议；非原SMPL60论文复现 |
 | FineDance作者202源参考池 | Divk9.728692、Divg7.441713 | 对作者发布特征重算，按论文精度为9.73/7.44；未证明202条原动作全量重提一致 |
-| FineDance loader有效GT19 / 作者202池 | FIDk23.158302、FIDg11.833807、Divk8.241111、Divg6.289283 | 与论文202源GT行分开；推理源码另列20源 |
-| AIST++ SMPL-X30 TEST20＋VAL20 / TRAIN952 | FIDk23.768604、FIDg11.607354、Divk8.212595、Divg7.504468 | 40条补充诊断，VAL角色不变 |
 | BEAT2 EMAGE2024兼容speaker2 TEST15 | BC raw0.686717（×10为6.867171）、L1div13.070166 | 用户接受近似复现；不含旧版FGD |
-| BEAT2当前公开版speaker2 TEST15 | FGD−0.000480、BC0.743632、L1div12.348844 | 独立版本，不能拼进2024结果 |
 | HumanML3D作者20 FPS TEST4198，20次 | R@1/2/3 0.512672/0.702338/0.797683；FID0.001632；Matching2.971407；Div9.550798 | 最终20轮，95%CI与每轮结果已归档 |
 
-舞蹈FID若有微小复数，完整JSON保留实虚部；微负FGD保留作者输出。分数接近不等于完整协议复现。原生GT打分、转换保真、重建质量、生成能力分别验收。
+同协议补充诊断：AIST++的TEST20＋VAL20为40条，FineDance的loader有效TEST为19条；这些是样本集合差别，不是另一套打分版本。数值与成员范围见[中文说明](数据集评测说明.md)。当前36项核心回归＋3项作者资产回归通过，AIST真实3源与FineDance真实2源迁移控制一致，见[验证记录](VALIDATION.md)。舞蹈FID若有微小复数，完整JSON保留实虚部。分数接近不等于完整协议复现。原生GT打分、转换保真、重建质量、生成能力分别验收。
 
 ## 仓库内容与许可
 

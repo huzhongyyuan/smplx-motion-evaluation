@@ -11,7 +11,7 @@ import torch
 from adapters import smplx_neutral
 from aist30 import features,protocol
 from contracts import read_manifest,require,load_smplx
-from evaluator_common import ROOT,UP,setup,smpl_male,load_file,write_json,native_aist_joints
+from evaluator_common import ROOT,UP,setup,smpl_male,load_file,write_json
 from source_lock import sha
 
 KINDS=('kinetic_features','manual_features_new')
@@ -73,10 +73,8 @@ def main():
         poses=np.zeros((len(pp),165),dtype=np.float32); poses[:,:66]=pp[:,:66]; trans=tt+delta
         sx,error=smplx_positions(model,poses,trans)
         np.testing.assert_allclose(sx[:,0],tt+male_root,atol=1e-6,rtol=0)
-        smpl=native_aist_joints(row['native_path'],male,frame_limit=None if split=='train' else 1200,frame_step=2)
         roles=['train952'] if split=='train' else ['eval40']+(['test20'] if split=='test' else [])
-        for domain,joints in (('smpl',smpl),('smplx',sx)):
-            for role in roles: save_features(joints,out/domain/role,sid)
+        for role in roles: save_features(sx,out/'smplx'/role,sid)
         if exports and split!='train':
             e=exports[sid]; require(e['fps']==30 and e['time_origin_s']==0,'Candidate clock mismatch')
             require(sha(e['smplx_path'])==e['smplx_sha256'],'Candidate bytes changed')
@@ -89,7 +87,7 @@ def main():
         print(json.dumps(dict(completed=len(records),total=992,source_id=sid)),flush=True)
     sys.path.insert(0,str(UP/'Bailando/utils'))
     metric=load_file('aist_smplx_author_metric',UP/'Bailando/utils/metrics_new.py'); scores={}
-    for domain in ('smpl','smplx')+(('candidate',) if exports else ()):
+    for domain in ('smplx',)+(('candidate',) if exports else ()):
         for role in ('test20','eval40'):
             scores[domain+'_'+role+'_vs_train952']=metric.quantized_metrics(str(out/domain/role),str(out/('smplx' if domain=='candidate' else domain)/'train952'))
     write_json(out/'result.json',dict(status='SCORER_RUN_FINISHED',verified_at=datetime.now(timezone.utc).isoformat(),

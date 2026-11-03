@@ -19,7 +19,7 @@ def command(dataset, output):
     elif dataset == 'BEAT2':
         args = ['score', '--dataset', dataset, '--split', 'test', '--arm', 'native_gt',
                 '--manifest', 'protocol_profiles_v1/emage_author_speaker2.jsonl',
-                '--membership-profile', 'emage_author_speaker2', '--beat-profile', 'emage2024_bc_l1']
+                '--membership-profile', 'emage_author_speaker2']
     else:
         raise ValueError('Unknown dataset: '+dataset)
     return [sys.executable, str(ROOT/'evaluate.py'), *args, '--output', str(output)]

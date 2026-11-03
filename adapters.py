@@ -6,14 +6,13 @@ Missing real endpoint samples are errors, never filled with held/extrapolated GT
 import argparse
 import json
 from pathlib import Path
-import pickle
 import shutil
 import sys
 import numpy as np
 from scipy.spatial.transform import Rotation
 import torch
 from contracts import require, load_smplx, smplx_shape, merge_body_hands, read_manifest, sample_at
-from evaluator_common import ROOT, UP, setup, smpl_male, write_json, load_file
+from evaluator_common import ROOT, UP, setup, write_json, load_file
 from source_lock import sha
 
 def smplx_neutral():
@@ -69,16 +68,13 @@ def adapt(args):
         rows = rows[:args.limit]
     args.output.mkdir(parents=True, exist_ok=False)
     code_paths=[ROOT/name for name in ('adapters.py','contracts.py','evaluator_common.py',
-                'official_preprocess.py','aist30.py','source_lock.py','assets_lock.py')]
+                'official_preprocess.py','source_lock.py','assets_lock.py')]
     (args.output/'code').mkdir()
     for path in code_paths:
         shutil.copy2(path,args.output/'code'/path.name)
     geometry = smplx_neutral() if args.dataset != 'BEAT2' else None
     interpolation = getattr(args, 'rotation_interpolation', 'local')
     parents = geometry.parents.numpy() if geometry is not None and interpolation == 'global_fk' else None
-    male = smpl_male() if args.dataset == 'AIST++' else None
-    if male is not None:
-        with torch.no_grad(): male_rest = male().joints[0, 0].numpy()
     process = hml_process() if args.dataset == 'HumanML3D' else None
     fd_receipts = None
     if args.dataset == 'FineDance':
@@ -129,23 +125,6 @@ def adapt(args):
                 value = process.process_file(positions.copy(), .002)[0]
                 require(value.shape == (n, 263) and np.isfinite(value).all(), 'HML official preprocessing failed')
                 fmt = 'humanml263'
-            elif args.dataset == 'AIST++':
-                from aist30 import CAP, FORMAT, select_export_frames
-                with Path(row['native_path']).open('rb') as f: n = min((len(pickle.load(f)['smpl_poses'])+1)//2, CAP)
-                rr, tt = select_export_frames(matrices, trans, origin, n)
-                aa = Rotation.from_matrix(rr[:, :22].reshape(-1, 3, 3)).as_rotvec().reshape(n, 66)
-                # SMPL24 and SMPL-X body22 share local rotation names. The two
-                # extra SMPL hand joints use defaults; SMPL-X jaw/eye slots are
-                # never mistaken for hands. Preserve world pelvis, not raw
-                # model-dependent translation coefficients.
-                st = tt+rest-male_rest; value = []
-                with torch.no_grad():
-                    for k in range(0, n, 64):
-                        p = torch.as_tensor(aa[k:k+64], dtype=torch.float32)
-                        body = torch.cat([p[:, 3:], torch.zeros(len(p), 6)], dim=-1)
-                        value.append(male(global_orient=p[:, :3], body_pose=body,
-                                          transl=torch.as_tensor(st[k:k+64], dtype=torch.float32)).joints[:, :24].numpy())
-                value = np.concatenate(value); fmt = FORMAT
             else:
                 crop = fd_receipts[sid]['native_source_start_frame']; n = min(fd_receipts[sid]['frames'], 1024)
                 rr, tt = sample_at(matrices, trans, 30, origin, (crop+np.arange(n))/30, parents=parents)
@@ -166,9 +145,9 @@ def adapt(args):
                                               own_code_sha256={p.name:sha(p) for p in code_paths},
                                               sources_lock_sha256=sha(ROOT/'sources.lock.json'),
                                               assets_lock_sha256=sha(ROOT/'assets.lock.json'),
-                                              rotation_interpolation='none_exact30fps' if args.dataset=='AIST++' else interpolation,
+                                              rotation_interpolation=interpolation,
                                               original_manifest_sha256=sha(args.manifest), exports_manifest_sha256=sha(args.exports),
-                                              preprocessing_scope='official target-format preparation; SMPL-X-to-SMPL parameter transfer must be quantified by GT controls', sources=receipts))
+                                              preprocessing_scope='official target-format preparation; conversion fidelity must be quantified by GT controls', sources=receipts))
 
 def main():
     p = argparse.ArgumentParser()

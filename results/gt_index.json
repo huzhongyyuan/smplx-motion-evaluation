@@ -33,7 +33,7 @@
       "scorer": "Bailando/utils/metrics_new.py",
       "scope": "Explicit30 FPS SMPL-X protocol, not paperSMPL60",
       "command": "python evaluate.py gt --dataset \"AIST++\" --output runs/smplx30_test20_vs_train952",
-      "result_sha256": "9818d514dcedff03e5ad80a7dc5e6d5c0529785bbed1fb61f84d4e81db388ffd"
+      "result_sha256": "a1e0caf8d6c30b03e1a4d8a6c31df2d2457343b5de8ae50ec955c87f6875c857"
     },
     {
       "dataset": "FineDance",
@@ -59,7 +59,7 @@
       "body_hands": "body+hands",
       "script": "beat2024.py",
       "scorer": "EMAGE_2024/utils/metric.py",
-      "scope": "Accepted approximate paper reproduction; raw BC and raw×10 both recorded; no legacyFGD",
+      "scope": "Accepted approximate paper reproduction; raw BC and raw\u00d710 both recorded; no legacyFGD",
       "command": "python evaluate.py gt --dataset \"BEAT2\" --output runs/emage2024_bc_l1_speaker2_test15",
       "result_sha256": "61f769240dd574684885ff70b887c69a07dc40f1e7af1ee3f75dcdc531e3fb79"
     }

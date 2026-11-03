@@ -1,0 +1,57 @@
+{
+  "archived_at": "2026-11-03T07:42:45.173645+00:00",
+  "source_commit": "802ed75a70f7cbb86416634c444c6a4891efe0de",
+  "scope": "Only the public evaluation package; original server experiment runs are unchanged",
+  "current_registry": "results/gt_index.json",
+  "entries": [
+    {
+      "original_path": "score_worker.py",
+      "archived_path": "legacy/beat_public2025/score_worker.py.txt",
+      "archived_sha256": "65fd5eb98d54cf1c9ddb2f431b8785318292a1c58280bde0bd08bc3ebd2a3370",
+      "replacement": "score_worker.py",
+      "reason": "Source snapshot: remove public2025 and SMPL control branches"
+    },
+    {
+      "original_path": "aist_smplx.py",
+      "archived_path": "legacy/aist_smpl_control/aist_smplx.py.txt",
+      "archived_sha256": "ff49c259cdc4c2ae2a2719cd9570e6018a13d2237e5f680b091060813beb8914",
+      "replacement": "aist_smplx.py",
+      "reason": "Source snapshot: current scorer uses only SMPL-X"
+    },
+    {
+      "original_path": "adapters.py",
+      "archived_path": "legacy/aist_smpl_control/adapters.py.txt",
+      "archived_sha256": "467b460268ceadabfd50a16e5aa58540117ad96cf9ee95020ceca9d5450a7f06",
+      "replacement": "aist_smplx.py",
+      "reason": "Source snapshot: old unreachable SMPL output adapter removed"
+    },
+    {
+      "original_path": "results/beat_full_result.json",
+      "archived_path": "legacy/beat_public2025/results/beat_full_result.json",
+      "archived_sha256": "d227f7b5432d6a08f01b5c28c1198585878f5300c532570152318700c8eb76b8",
+      "replacement": "results/beat2024_speaker2_gt.json",
+      "reason": "Superseded public2025/full265 protocol"
+    },
+    {
+      "original_path": "results/beat_speaker2_result.json",
+      "archived_path": "legacy/beat_public2025/results/beat_speaker2_result.json",
+      "archived_sha256": "f41ee4a24e9bcd8b2ae920cb680b94ed237dc99776c9ccdb7216b96476f512e2",
+      "replacement": "results/beat2024_speaker2_gt.json",
+      "reason": "Superseded public2025 protocol"
+    },
+    {
+      "original_path": "results/aist_smplx30.json",
+      "archived_path": "legacy/aist_smpl_control/results/aist_smplx30_full_comparison.json",
+      "archived_sha256": "9818d514dcedff03e5ad80a7dc5e6d5c0529785bbed1fb61f84d4e81db388ffd",
+      "replacement": "results/aist_smplx30.json",
+      "reason": "Complete historical SMPL/SMPL-X comparison retained; current result keeps exact SMPL-X branches"
+    },
+    {
+      "original_path": "results/public_gt_migration.json",
+      "archived_path": "legacy/previous_release/results/public_gt_migration.json",
+      "archived_sha256": "431d4d12b2b129458123f7797218f306a8e2e6e62401b1e2f17e71c2d42389c3",
+      "replacement": "VALIDATION.md",
+      "reason": "Prior release validation binds prior code, preserved as historical evidence"
+    }
+  ]
+}

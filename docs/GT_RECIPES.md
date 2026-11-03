@@ -1,6 +1,6 @@
 # 与已报告GT对应的四套入口
 
-所有数值来自已完成的GT实验。原始结果SHA、完整精度和统计重复保存在`results/`；[gt_index.json](../results/gt_index.json)绑定配方、脚本与结果。每个源的名字和角色见[gt_eval_members.json](../metadata/gt_eval_members.json)，输入SHA与格式见[members.jsonl](../metadata/members.jsonl)。
+每库仅一个当前协议，下面四条是唯一当前配方；不能按分数选择版本。原始结果SHA、完整精度和统计重复保存在`results/`；[gt_index.json](../results/gt_index.json)绑定配方、脚本与结果。每个源的名字和角色见[gt_eval_members.json](../metadata/gt_eval_members.json)，输入SHA与格式见[members.jsonl](../metadata/members.jsonl)。历史对照仅在[legacy](../legacy/README.md)追溯。
 
 | 数据集 | 入口脚本 → 作者实现 | GT口径 | 对应结果 |
 |---|---|---|---|
@@ -38,7 +38,7 @@ python evaluate.py score --dataset FineDance --split test \
 
 2024兼容入口保留L1div原地改写后BC复用的历史行为、0.3阈值、整秒/8帧/64+60k时间支持，以及body＋hands。15源共28680动作帧、26880 BC帧。raw BC0.686717133568按主表raw×10显示为6.867171335676；距论文6.896约0.42%，L1div13.070166距13.074约0.029%，已接受近似复现。
 
-旧版入口仅BC/L1div。当前公开版的FGD及BC/L1div独立保存在[beat_speaker2_result.json](../results/beat_speaker2_result.json)，不能与旧版拼成同一行。重建/生成的手须来自对应输出，不用GT手填充。
+当前固定入口仅BC/L1div，不提供版本选择项。先前public2025的FGD及BC/L1div已移到[legacy](../legacy/README.md)，不进入当前报告。重建/生成的手须来自对应输出，不用GT手填充。
 
 ## HumanML3D和AIST++
 

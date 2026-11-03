@@ -1,0 +1,98 @@
+{
+  "status": "SINGLE_CURRENT_PROTOCOL_CHECKS_PASSED",
+  "verified_at": "2026-11-03T07:51:21.936768+00:00",
+  "cpu_affinity": [
+    0,
+    1
+  ],
+  "cuda_visible_devices": "",
+  "current_recipes": {
+    "HumanML3D": "t2m_author20_test4198_rep20",
+    "AIST++": "smplx30_test20_vs_train952",
+    "FineDance": "lodge_published202_gt",
+    "BEAT2": "emage2024_bc_l1_speaker2_test15"
+  },
+  "test_scope": "evaluate.py check and test_beat2024; exact totals retained in the server validation log",
+  "aist_control": {
+    "status": "REAL3_GEOMETRY_AND_FEATURE_CONTROL_PASSED",
+    "sources": [
+      {
+        "source_id": "gBR_sBM_cAll_d04_mBR0_ch01",
+        "frames": 360,
+        "max_full_model_error_m": 2.384185791015625e-07,
+        "features_exactly_equal": true
+      },
+      {
+        "source_id": "gBR_sBM_cAll_d04_mBR0_ch02",
+        "frames": 360,
+        "max_full_model_error_m": 2.384185791015625e-07,
+        "features_exactly_equal": true
+      },
+      {
+        "source_id": "gBR_sBM_cAll_d05_mBR0_ch01",
+        "frames": 360,
+        "max_full_model_error_m": 2.384185791015625e-07,
+        "features_exactly_equal": true
+      }
+    ],
+    "scope": "small migration control, not a new992-source evaluation"
+  },
+  "finedance_control": {
+    "sources": [
+      "001",
+      "002"
+    ],
+    "scope": "Two real TRAIN sources against the unchanged LODGE202 reference, old/new features byte-identical and scores exactly equal",
+    "metrics": {
+      "fid_k": {
+        "type": "complex",
+        "real": 66.95033444082996,
+        "imag": -1.4799755007193574e-07
+      },
+      "fid_m": 40.890115074474515,
+      "div_k": 4.430596828460693,
+      "div_m": 4.084523677825928,
+      "div_k_gt": 9.728691849938494,
+      "div_m_gt": 7.441712841724804
+    }
+  },
+  "reuse_scope": "Existing full HML20, AIST992 and BEAT15 evidence reused; no full four-dataset rerun",
+  "source_lock_sha256": "71026b363b090ecddb8af8000c88e4d0d0e576d0e495f22670b98e473435bd08",
+  "code_sha256": {
+    "adapters.py": "9dafa0e4aaff2a1a3e20229c462f68fee890f4255870d2568f5911dc9271cf62",
+    "aist30.py": "de9a5e87592371febc529d2be0f0597c7e08b0afd109441029050aa2c330c974",
+    "aist_smplx.py": "83af16dc1425537d40674bff3a0445bfcfe3f0b502f9b5e3f0be56a3b0820bb1",
+    "assets_lock.py": "6d8de06c53e799a7632ef081f9e51833f152c87e021ecefc62767a362f258e0e",
+    "beat2024.py": "465963b2dcaf8a6429ea9618087cabc07cc84091034fae9b4234fa5278faf5aa",
+    "check_release.py": "4be75676a590204c25978a06e0f77327c2d7ab09826e9594bbd3aa50a17de8b5",
+    "configure.py": "4bb6a03faf7392345c7db813ca6c9087c4b9396a6712ea43dbeb9fcb6ade7f48",
+    "contracts.py": "c6910ca70d60149a34c1980ef1c5a953f23df654f2578dbd21be1d0f689892ac",
+    "evaluate.py": "7da755f5983cfef14bd74079695dcc6bbefcb92c8ff6aff68969f1e1a70597ae",
+    "evaluator_common.py": "c976c7ff2f0a504b453717501f1c35a5f785efd5612879d40af8ff57633250c3",
+    "fetch_upstream.py": "ec47ab1c9e7409abb056029dce293b86998fc3ee20dd28727efcc4564e9abe5e",
+    "gt.py": "26017506b0520a046abd9f27a7930f80efb1d4fbd658584425969c2304911a8a",
+    "hml_generated.py": "bc5c9caa8ddb29fc8e14b5754edb2df563a34d01396d4f7b9925418d69ec3c30",
+    "hml_plan.py": "e990767497ac4dfef36aa88aa19c6b05a3806e8568ced56bf4e845829025c0d4",
+    "hml_sources.py": "39bef0942d608f2eeb588c81550c1ab75788dd3be2cb9e70a8e64a3a9db18b8d",
+    "hml_time.py": "319a552b862fb40a07e04faa4d759c9e67d474b993153767cda1f67f466968e0",
+    "hml_time_probe.py": "cd2e09b8d6d8919f46f5860ee2a95c7cc32e4757309626f879d9e5de3755f540",
+    "lodge_gt.py": "140d2b5fe9d6129180452ab507fd8a4561d2f870eec3650d377fe68681ca3ce3",
+    "official_preprocess.py": "c027fd459703b220db49986080a004ffbc868c503c024b4a58137fac4be03764",
+    "prepare_beat2024.py": "39bc5250b0f04da9b04d22114b7cbd3e8c461e5e9bb412b16f71bef1fedfb607",
+    "prepare_local_assets.py": "954cdae5882b3ad410347ffc910bb7550d5911836a4cdcb66208257071f88c7a",
+    "report.py": "e376aef117c6b4d00cee0b995545f3e154f4b0a29d3106cb83731344c1ec3271",
+    "score_worker.py": "283e3d57597aadef10549cd0b7c7a4a12a7ab9eedb250cf5145373a8349f2e77",
+    "source_lock.py": "5770cd466bc5e4797a98758c43f2bbde0310df1e6425287e4878f6c8bfbe824d",
+    "test_aist30.py": "29022d64a14322e99c5f82d6375911fce12c970a1b58fa1a040d8dcfbb1c6c86",
+    "test_beat2024.py": "7c8d01a706a0dae99d728576f648b819d82bdbccefbf8a8081a4e6c80d16505e",
+    "test_beat_report.py": "efbfdbcb0e69760e548b5d6b079cd0c56887d89a8df30221875bb7deb521547c",
+    "test_contracts.py": "18654c196d4642a1012c8c6eeaa3089a27dd753bf060d10a7d1f66f4fd37bb83",
+    "test_current_protocols.py": "52b149c8cceb09deccbc02f5c73d0ee5c25e68ea5ed15161d8ab4dfb9b450544",
+    "test_gt_results.py": "a7d49dba211ebb08dc559dfba46dbae6a9bd124b15c0e6405fd0d10a5083a80a",
+    "test_hml_sources.py": "58e511ce831a33e59d8c00d1723814b3d7a58a43e6dad234ebb93e15528e1c5a",
+    "test_hml_time.py": "a22bb827694781db265fa7b301b743cd5dae085b913ca4fc89e443e6e0100643",
+    "test_metric_transport.py": "bb45937ef39c60f7ea4c28009fbc2403b0bfbcc838f162ecd0c3c9f13cd625b8",
+    "test_protocol.py": "b9aa17882e258517c2eaea866af2660ccecf15386ffe282882de0623bae67575",
+    "test_release_metadata.py": "c06a71c7378929dc52e6377bd1379d1818f2ee03a22f2c5d7d43ad7f1f327e85"
+  }
+}

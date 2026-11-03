@@ -109,7 +109,7 @@ def run(args, rows):
         beat_profile=PROFILE, motion_frames=l1.counter, bc_frames=bc_count,
         profile_receipt_sha256=sha(ASSETS/'receipt.json'), asset_provenance=receipt,
         display=dict(BC_times_10=10*raw_bc, convention='10^-1 display: raw BC multiplied by10'),
-        FGD=None, FGD_reason='Legacy BC/L1 only; public2025 FGD is a separate result.',
+        FGD=None, FGD_reason='The current frozen protocol implements BC/L1 only; previous FGD results are archived in legacy/.',
         evaluated_joints='55 local SMPL-X joints; body+hands; no separate face metric or GT filling',
         paper_reproduction=False,
         scope='Pinned historical caller compatibility; accepted approximate reproduction, not exact paper identity',

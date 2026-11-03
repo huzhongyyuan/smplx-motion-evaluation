@@ -12,67 +12,43 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 import numpy as np
 import torch
-from evaluator_common import ROOT, UP, setup, load_file, cwd, cpu_checkpoint_loading, write_json, native_aist_joints, smpl_male
+from evaluator_common import ROOT, UP, setup, load_file, cwd, cpu_checkpoint_loading, write_json
 from source_lock import sha
-from contracts import require, load_smplx, finite
+from contracts import require
 
 def dance(args, rows):
-    if args.dataset == 'AIST++':
-        sys.path.insert(0, str(UP/'Bailando/utils'))
-        metric = load_file('official_dance_metric', UP/'Bailando/utils/metrics_new.py')
-        model = smpl_male()
-    else:
-        sys.path[:0] = [str(UP/'LODGE/metric'), str(UP/'LODGE')]
-        metric = load_file('official_dance_metric', UP/'LODGE/metric/metrics_finedance.py')
-        from dld.data.render_joints.smplfk import SMPLX_Skeleton
-        metric.device = 'cpu'
-        metric.smplx_model = SMPLX_Skeleton(Jpath=str(UP/'LODGE/data/smplx_neu_J_1.npy'))
+    require(args.dataset == 'FineDance', 'Use aist-smplx for AIST++ SMPL-X30 scoring')
+    sys.path[:0] = [str(UP/'LODGE/metric'), str(UP/'LODGE')]
+    metric = load_file('official_dance_metric', UP/'LODGE/metric/metrics_finedance.py')
+    from dld.data.render_joints.smplfk import SMPLX_Skeleton
+    metric.device = 'cpu'
+    metric.smplx_model = SMPLX_Skeleton(Jpath=str(UP/'LODGE/data/smplx_neu_J_1.npy'))
     pred, ref = args.output/'prediction', args.output/'reference'
     pred.mkdir(); ref.mkdir()
     inputs = []
-    if args.dataset == 'FineDance':
-        from official_preprocess import finedance_preprocess
-        native_preprocessed, crop_receipt = finedance_preprocess(
-            {r['source_id']: r['native_path'] for r in rows}, args.output/'native_preprocess')
+    from official_preprocess import finedance_preprocess
+    native_preprocessed, crop_receipt = finedance_preprocess(
+        {r['source_id']: r['native_path'] for r in rows}, args.output/'native_preprocess')
     for row in rows:
         sid = row['source_id']; native = Path(row['native_path'])
         require(native.is_file(), f'Missing native: {native}')
-        if args.dataset == 'AIST++':
-            from aist30 import CAP, FORMAT
-            require(row['fps'] == 60, 'AIST native must be60fps')
-            joints = native_aist_joints(native, model, frame_limit=CAP*2, frame_step=2)
-            if args.arm == 'native_gt':
-                candidate = joints.copy()
-            else:
-                p = Path(row['prediction_path']); require(row['prediction_format'] == FORMAT, 'AIST30 adapter required')
-                candidate = finite(np.load(p, allow_pickle=False), (24, 3), 'AIST prediction')
-                require(len(candidate) >= len(joints), f'{sid}: prediction fails to cover30fps600-frame/native-shorter support')
-            for target, x in ((ref, joints), (pred, candidate)):
-                np.save(target/f'{sid}.npy', {'pred_position': x.reshape(len(x), 72)})
+        require(row['fps'] == 30, 'FineDance native must be30fps')
+        x = np.load(native_preprocessed/f'{sid}.npy', allow_pickle=False)
+        require(x.ndim == 2 and x.shape[1] in (315, 319, 135, 139) and np.isfinite(x).all(), 'LODGE requires native 315/319 or body135/139; 266D RIC is not its input')
+        if args.arm == 'native_gt':
+            candidate = x.copy()
         else:
-            require(row['fps'] == 30, 'FineDance native must be30fps')
-            x = np.load(native_preprocessed/f'{sid}.npy', allow_pickle=False)
-            require(x.ndim == 2 and x.shape[1] in (315, 319, 135, 139) and np.isfinite(x).all(), 'LODGE requires native 315/319 or body135/139; 266D RIC is not its input')
-            if args.arm == 'native_gt':
-                candidate = x.copy()
-            else:
-                require(row['prediction_format'] == 'lodge139_preprocessed', 'FineDance requires official-preprocessed139/319D; do not double-crop native data')
-                require(row['prediction_native_start_frame'] == crop_receipt[sid]['native_source_start_frame'], 'FineDance prediction crop differs from author preprocessing')
-                candidate = np.load(row['prediction_path'], allow_pickle=False)
-            require(candidate.ndim == 2 and candidate.shape[1] in (135, 139, 315, 319), 'FineDance adapter format invalid')
-            # Freeze the identical source timeline before the official1024-frame cap.
-            require(len(candidate) >= min(len(x), 1024), f'{sid}: prediction fails to cover official1024-frame/native-shorter support')
-            for target, value in ((ref, x), (pred, candidate)):
-                np.save(target/f'{sid}.npy', value)
+            require(row['prediction_format'] == 'lodge139_preprocessed', 'FineDance requires official-preprocessed139/319D; do not double-crop native data')
+            require(row['prediction_native_start_frame'] == crop_receipt[sid]['native_source_start_frame'], 'FineDance prediction crop differs from author preprocessing')
+            candidate = np.load(row['prediction_path'], allow_pickle=False)
+        require(candidate.ndim == 2 and candidate.shape[1] in (135, 139, 315, 319), 'FineDance adapter format invalid')
+        # Freeze the identical source timeline before the official1024-frame cap.
+        require(len(candidate) >= min(len(x), 1024), f'{sid}: prediction fails to cover official1024-frame/native-shorter support')
+        for target, value in ((ref, x), (pred, candidate)):
+            np.save(target/f'{sid}.npy', value)
         inputs.append(dict(source_id=sid, native=str(native), native_sha256=sha(native),
                            prediction_sha256=sha(row['prediction_path']) if args.arm != 'native_gt' else sha(native)))
-    # AIST uses explicit30fps feature times; FID/diversity stay author-original.
-    feature_protocol = None
-    if args.dataset == 'AIST++':
-        from aist30 import calc_and_save_feats, protocol, validate_reference
-        feature_protocol = protocol()
-    else:
-        calc_and_save_feats = metric.calc_and_save_feats
+    calc_and_save_feats = metric.calc_and_save_feats
     calc_and_save_feats(str(ref)); calc_and_save_feats(str(pred))
     expected = {r['source_id']+'.npy' for r in rows}
     for d in (ref, pred):
@@ -85,7 +61,6 @@ def dance(args, rows):
         scoring_ref = args.reference_features.resolve()
         receipt = json.loads((scoring_ref/'reference_receipt.json').read_text())
         require(receipt['dataset'] == args.dataset, 'Wrong reference benchmark')
-        if args.dataset == 'AIST++': validate_reference(receipt)
         for name, expected_sha in receipt['files'].items():
             require(sha(scoring_ref/name) == expected_sha, 'Frozen GT reference feature changed')
         expected_files = set(receipt['files'])
@@ -95,8 +70,8 @@ def dance(args, rows):
     scores = metric.quantized_metrics(str(pred), str(scoring_ref))
     return dict(metrics=scores, inputs=inputs,
                 reference_scope=reference_scope,
-                feature_protocol=feature_protocol,
-                upstream_feature_cap=600 if args.dataset == 'AIST++' else 1024,
+                feature_protocol=None,
+                upstream_feature_cap=1024,
                 identity_features_equal=all(np.array_equal(np.load(pred/k/p.name), np.load(p)) for k in ('kinetic_features', 'manual_features_new') for p in (ref/k).iterdir()))
 
 def humanml(args, rows):
@@ -183,54 +158,10 @@ def humanml(args, rows):
                         else 'UNVERIFIED_LOCAL_TENSORS: diagnostic only; must not enter a formal result')
 
 def beat(args, rows):
-    if args.beat_profile == 'emage2024_bc_l1':
-        from beat2024 import run
-        return run(args, rows)
-    sys.path.insert(0, str(UP))
-    from emage_evaltools.mertic import FGD, BC, L1div
-    import types
-    package = types.ModuleType('official_emage_geometry'); package.__path__ = [str(UP/'EMAGE_caller')]
-    sys.modules[package.__name__] = package
-    # Keep the author's fixed relative SMPL-X asset path intact.
-    with cwd(ROOT/'assets'):
-        import importlib
-        geometry = importlib.import_module('official_emage_geometry.motion_rep_transfer')
-    rotation = importlib.import_module('official_emage_geometry.rotation_conversions')
-    assetdir = str(ROOT/'assets/emage_evaltools')+'/'
-    with cpu_checkpoint_loading(): fgd = FGD(download_path=assetdir, device='cpu')
-    bc = BC(download_path=assetdir, sigma=.3, order=7); l1 = L1div()
-    per_case = []
-    for r in rows:
-        gt, _, betas = load_smplx(r['native_path'], 30)
-        pred = gt.copy() if args.arm == 'native_gt' else load_smplx(r['prediction_path'], 30)[0]
-        require(gt.shape == pred.shape and len(gt) > 120, 'BEAT requires matching timeline and >4s for official BC crop')
-        t = len(gt)
-        # CPU chunking only changes memory scheduling, not the original per-frame LBS.
-        with torch.no_grad():
-            boundaries = list(range(0, t, 64))
-            if t-boundaries[-1] == 1:
-                boundaries.pop()
-            boundaries.append(t)
-            position = np.concatenate([geometry.get_motion_rep_numpy(pred[a:b], device='cpu', betas=betas)['position']
-                                       for a, b in zip(boundaries[:-1], boundaries[1:])], axis=0).reshape(t, -1)
-        onset = bc.load_audio(r['audio_path'], t_start=2*16000, t_end=int((t-60)/30*16000))
-        require(len(onset) > 0, 'No speech onsets in official BC support; no substitute beat score')
-        beats = bc.load_motion(position, t_start=60, t_end=t-60, pose_fps=30, without_file=True)
-        bc.compute(onset, beats, length=t-120, pose_fps=30); l1.compute(position)
-        with torch.no_grad():
-            p6 = rotation.axis_angle_to_rotation_6d(torch.from_numpy(pred).reshape(1, t, 55, 3)).reshape(1, t, 330)
-            g6 = rotation.axis_angle_to_rotation_6d(torch.from_numpy(gt).reshape(1, t, 55, 3)).reshape(1, t, 330)
-            fgd.update(p6.float(), g6.float())
-        per_case.append(dict(source_id=r['source_id'], frames=t, fgd_frames=t-t%32, bc_frames=t-120,
-                             native_sha256=sha(r['native_path']), audio_sha256=sha(r['audio_path'])))
-        print(json.dumps(dict(dataset='BEAT2', completed=len(per_case), total=len(rows),
-                              source_id=r['source_id'], frames=t)), flush=True)
-    return dict(metrics=dict(FGD=fgd.compute(), BC=bc.avg(), L1div=l1.avg()), inputs=per_case,
-                face_metrics='not requested; LVDFace/MSEFace not evaluated',
-                fgd_scope='unchanged official55-joint330D encoder, includes body/hands and the3 face-pose slots; never fill missing prediction slots with GT',
-                bc_geometry='original neutral-model local55 joints: global orientation and translation intentionally zeroed by official caller')
+    from beat2024 import run
+    return run(args, rows)
 
-def main():
+def parse_args(argv=None):
     p = argparse.ArgumentParser(); p.add_argument('--dataset', choices=('HumanML3D','AIST++','FineDance','BEAT2'), required=True)
     p.add_argument('--manifest', type=Path, required=True); p.add_argument('--output', type=Path, required=True)
     p.add_argument('--arm', choices=('native_gt','native_format_control','time_resample_control','previous_smplx_gt','soma_gt_roundtrip','tokenizer_roundtrip','generated'), required=True)
@@ -239,9 +170,22 @@ def main():
     p.add_argument('--generated-records', type=Path)
     p.add_argument('--condition-plan', type=Path)
     p.add_argument('--reference-features', type=Path)
-    p.add_argument('--membership-profile', choices=('all_official_sources','emage_author_speaker2'), default='all_official_sources')
-    p.add_argument('--beat-profile', choices=('public2025','emage2024_bc_l1'), default='public2025')
-    args = p.parse_args(); args.output = args.output.resolve(); args.manifest = args.manifest.resolve(); setup()
+    p.add_argument('--membership-profile', choices=('all_official_sources','emage_author_speaker2'))
+    args = p.parse_args(argv)
+    if args.dataset == 'AIST++':
+        p.error('Use evaluate.py aist-smplx: the only current AIST++ protocol is SMPL-X30 / TRAIN952')
+    args.beat_profile = 'emage2024_bc_l1' if args.dataset == 'BEAT2' else None
+    if args.membership_profile is None:
+        args.membership_profile = 'emage_author_speaker2' if args.dataset == 'BEAT2' else 'all_official_sources'
+    if args.dataset == 'BEAT2' and args.membership_profile != 'emage_author_speaker2':
+        p.error('BEAT2 uses the fixed EMAGE2024 speaker2 protocol; previous full-CSV scoring is archived in legacy/')
+    if args.dataset != 'BEAT2' and args.membership_profile != 'all_official_sources':
+        p.error('speaker2 membership only applies to BEAT2')
+    return args
+
+
+def main():
+    args = parse_args(); args.output = args.output.resolve(); args.manifest = args.manifest.resolve(); setup()
     require(args.replications > 0, 'Replications must be positive')
     require(not (args.dataset == 'HumanML3D' and args.arm == 'generated' and not (args.generated_records and args.condition_plan)),
             'Generated HML requires caption-specific frozen generation inputs; source-wise GT reconstruction loader must not be called a formal generation protocol')
@@ -262,8 +206,7 @@ def main():
         rows = rows[:args.limit]
     from test_protocol import validate_test_protocol
     input_protocol = validate_test_protocol(args, rows)
-    if args.beat_profile != 'public2025':
-        require(args.dataset == 'BEAT2', 'BEAT caller profile is only valid for BEAT2')
+    if args.dataset == 'BEAT2':
         from beat2024 import verify_profile
         verify_profile()
     args.output.mkdir(parents=True, exist_ok=False)
@@ -273,10 +216,9 @@ def main():
                   'official_preprocess.py', 'hml_generated.py', 'hml_sources.py', 'test_protocol.py', 'aist30.py', 'evaluate.py', 'source_lock.py', 'assets_lock.py')]
     if args.dataset == 'BEAT2':
         code_paths.append(ROOT/'beat2024.py')
-        if args.beat_profile == 'emage2024_bc_l1':
-            from beat2024 import ASSETS
-            shutil.copy2(ASSETS/'receipt.json', args.output/'beat_profile_receipt.json')
-            shutil.copy2(ASSETS/'source/utils/metric.py', args.output/'beat_author_metric.py')
+        from beat2024 import ASSETS
+        shutil.copy2(ASSETS/'receipt.json', args.output/'beat_profile_receipt.json')
+        shutil.copy2(ASSETS/'source/utils/metric.py', args.output/'beat_author_metric.py')
     (args.output/'code').mkdir()
     for path in code_paths: shutil.copy2(path, args.output/'code'/path.name)
     record = dict(status='RUNNING', arguments=vars(args) | {'manifest': str(args.manifest), 'output': str(args.output), 'generated_records': str(args.generated_records) if args.generated_records else None, 'condition_plan': str(args.condition_plan) if args.condition_plan else None, 'reference_features': str(args.reference_features) if args.reference_features else None},

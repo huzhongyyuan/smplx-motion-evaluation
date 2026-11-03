@@ -31,7 +31,9 @@ def identity(result):
     if isinstance(reference,dict): reference = reference['files']
     beat_protocol = None
     if result['dataset'] == 'BEAT2':
-        beat_protocol = dict(profile=result.get('beat_profile', 'public2025'),
+        require(result.get('beat_profile') == 'emage2024_bc_l1',
+                'Current BEAT2 reports only accept the frozen EMAGE2024 protocol; previous profiles are in legacy/')
+        beat_protocol = dict(profile=result['beat_profile'],
                              receipt=result.get('profile_receipt_sha256'),
                              support=[{k:r[k] for k in ('frames','old_loader_frames','bc_frames') if k in r}
                                       for r in result['inputs']])
@@ -57,7 +59,7 @@ def main():
             formal_official_result=False,quality_acceptance='PENDING')
         row['input_protocol']=result.get('input_protocol')
         row['feature_protocol']=result.get('feature_protocol')
-        row['beat_profile']=result.get('beat_profile', 'public2025' if result['dataset']=='BEAT2' else None)
+        row['beat_profile']=result.get('beat_profile')
         row['evaluation_group']=('native_'+row['split']+'_vs_independent_reference_diagnostic'
             if row['arm']=='native_gt' and row['dataset'] in ('AIST++','FineDance') else row['arm'])
         row['metric_branch']='candidate_'+result['arm'] if 'metric_summary' in result else None
@@ -104,7 +106,7 @@ def main():
               'HumanML3D表格取candidate_<arm>分支；GT对照的native_gt分支独立采样caption/crop，数值可不同。95% CI来自作者的重复评测统计，不代表SOMA质量已经通过。',
               '作者实现若返回复数，JSON及表格均原样保留实部和虚部，不默默取实部或凭JSON层阈值决定通过；正式解释另依据数值检查。',
               'SOMA GT、Tokenizer和生成质量仍须各自的真实产物及冻结验收。']
-    lines += ['BEAT2按caller及时间支持分组；public2025和emage2024_bc_l1不能混算差值。BC论文显示值为raw×10；旧版兼容不包含FGD。']
+    lines += ['BEAT2固定为emage2024_bc_l1，并按时间支持配对；BC论文显示值为raw×10。当前协议不包含FGD，历史流程仅在legacy中追溯。']
     (args.output/'report.md').write_text('\n'.join(lines)+'\n')
     print(json.dumps(dict(status='REPORT_WRITTEN',rows=len(rows),output=str(args.output))))
 

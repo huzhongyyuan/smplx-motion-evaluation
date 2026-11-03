@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parent
 class GTResultsTests(unittest.TestCase):
     def test_all_four_recipes_link_exact_archives(self):
         index = json.loads((ROOT/'results/gt_index.json').read_text())
+        self.assertEqual(len(index['recipes']), 4)
         self.assertEqual({r['dataset'] for r in index['recipes']}, {'HumanML3D','AIST++','FineDance','BEAT2'})
         for recipe in index['recipes']:
             self.assertEqual(sha(ROOT/recipe['result']), recipe['result_sha256'])
@@ -55,7 +56,8 @@ class GTResultsTests(unittest.TestCase):
         self.assertAlmostEqual(bc, result['metrics']['BC'], places=14)
         self.assertAlmostEqual(bc*10, result['display']['BC_times_10'], places=13)
         self.assertIsNone(result['FGD'])
-        self.assertIn('emage2024_bc_l1', command('BEAT2','unused'))
+        self.assertNotIn('--beat-profile', command('BEAT2','unused'))
+        self.assertIn('emage_author_speaker2', command('BEAT2','unused'))
 
     def test_aist_test_and_val_roles_remain_separate(self):
         result = json.loads((ROOT/'results/aist_smplx30.json').read_text())
@@ -66,6 +68,21 @@ class GTResultsTests(unittest.TestCase):
         self.assertTrue(set(members['test']).isdisjoint(members['val']))
         self.assertIn('smplx_test20_vs_train952', result['metrics'])
         self.assertIn('smplx_eval40_vs_train952', result['metrics'])
+
+    def test_current_aist_scores_are_unchanged_smplx_branches_only(self):
+        current = json.loads((ROOT/'results/aist_smplx30.json').read_text())
+        archived = json.loads((ROOT/current['historical_comparison']).read_text())
+        self.assertEqual(current['metrics'], {k:v for k,v in archived['metrics'].items() if k.startswith('smplx_')})
+        self.assertEqual(current['sources'], archived['sources'])
+        self.assertEqual(len(current['metrics']), 2)
+
+    def test_legacy_mapping_preserves_hashes_and_replacements(self):
+        manifest = json.loads((ROOT/'legacy/migration.json').read_text())
+        for row in manifest['entries']:
+            self.assertEqual(sha(ROOT/row['archived_path']), row['archived_sha256'])
+            self.assertTrue((ROOT/row['replacement']).is_file())
+        for name in ('beat_full_result.json','beat_speaker2_result.json','public_gt_migration.json'):
+            self.assertFalse((ROOT/'results'/name).exists())
 
 
 if __name__ == '__main__':

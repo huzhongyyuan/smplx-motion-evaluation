@@ -60,34 +60,6 @@
     "metric_formula": "unchanged Bailando quantized_metrics and existing explicit30fps extractors"
   },
   "metrics": {
-    "smpl_test20_vs_train952": {
-      "fid_k": {
-        "type": "complex",
-        "real": 29.450559929699708,
-        "imag": -1.0589251727668964e-06
-      },
-      "fid_m": {
-        "type": "complex",
-        "real": 17.067572907250373,
-        "imag": -1.9815405295116108e-07
-      },
-      "div_k": 8.374520921079736,
-      "div_m": 8.250073726239957,
-      "div_k_gt": 9.41650435894738,
-      "div_m_gt": 7.398774893010014
-    },
-    "smpl_eval40_vs_train952": {
-      "fid_k": {
-        "type": "complex",
-        "real": 24.614795915410554,
-        "imag": -2.952643664968952e-07
-      },
-      "fid_m": 11.505435561600876,
-      "div_k": 8.32696127366179,
-      "div_m": 7.6476901978254315,
-      "div_k_gt": 9.41650435894738,
-      "div_m_gt": 7.398774893010014
-    },
     "smplx_test20_vs_train952": {
       "fid_k": {
         "type": "complex",
@@ -8064,5 +8036,6 @@
       "export_sha256": "b5f1ed8a95062571f6addb26f6cb8fa4fd58d3430da2bf573047937a555102c0",
       "full_model_check_max_m": 2.384185791015625e-07
     }
-  ]
+  ],
+  "historical_comparison": "legacy/aist_smpl_control/results/aist_smplx30_full_comparison.json"
 }
