@@ -1,0 +1,20 @@
+{
+  "files": {
+    "assets/t2m/t2m/text_mot_match/model/finest.tar": "4d08626fcbee25e4794ccc4ad8e96954fd4fd5a1df15f304884c95b1abb697ab",
+    "assets/t2m/mean.npy": "0bdb5ba69a3a9e34d71990db15bc535ebc024c8d95ddb5574196f96058faa7d3",
+    "assets/t2m/std.npy": "6a5f7d60301c9465972fc225f8ad0ee8f957e7720431189123eb6d15873a9557",
+    "assets/emage_evaltools/AESKConv_240_100.bin": "5cd9566b24264f34d44003b3de62cdfd50aa85b7cdde2d369214599023c40f55",
+    "assets/emage_evaltools/mean_vel_smplxflame_30.npy": "53b5e48f2a7bf78c41a6de6395d6bb4f29018465ca5d0ee2820a2be3eebb7137",
+    "assets/emage_evaltools/smplx_models/smplx/SMPLX_NEUTRAL_2020.npz": "bdf06146e27d92022fe5dadad3b9203373f6879eca8e4d8235359ee3ec6a5a74",
+    "assets/smpl/SMPL_MALE.pkl": "0e8c0bbbbc635dcb166ed29c303fb4bef16ea5f623e5a89263495a9e403575bd",
+    "upstream/T2M/glove/our_vab_data.npy": "73ed9b73ee5bc5ab683661c132b9f98fe305672dffdf70ceeac1bc447543d668",
+    "upstream/T2M/glove/our_vab_idx.pkl": "d85dce83d2c27a92bb94bb51dc1f55a04fcaa328c359d23eccf648e296c16493",
+    "upstream/T2M/glove/our_vab_words.pkl": "fac88da1be6f00d36b72b88c9745c8ac35a94a7bd6ccf1fa3bab380faf8c2e0d"
+  },
+  "tensor_equivalent_alternatives": {
+    "assets/t2m/t2m/text_mot_match/model/finest.tar": [
+      "881e45bea6fb84b15eca6e7cdd75d602b58a72f2038c223ee96ab75d4f684ada"
+    ]
+  },
+  "licensed_body_models": "obtain from authors; never redistributed"
+}

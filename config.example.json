@@ -1,0 +1,15 @@
+{
+  "datasets": ["HumanML3D", "AIST++", "FineDance", "BEAT2"],
+  "links": {
+    "data/HumanML3D/motions": "/your-data/HumanML3D/new_joint_vecs",
+    "data/HumanML3D/texts": "/your-data/HumanML3D/texts",
+    "data/AIST++/motions": "/your-data/AISTpp/motions",
+    "data/FineDance/motions": "/your-data/FineDance/motion",
+    "data/BEAT2/motions": "/your-data/BEAT2/smplxflame_30",
+    "data/BEAT2/audio": "/your-data/BEAT2/wave16k",
+    "assets/smpl": "/your-licensed-models/smpl",
+    "assets/emage_evaltools": "/your-assets/emage_evaltools",
+    "assets/hml_author_endpoint_controls_joints_v1": "/your-assets/hml_reference_joints",
+    "upstream/T2M/glove": "/your-assets/glove"
+  }
+}

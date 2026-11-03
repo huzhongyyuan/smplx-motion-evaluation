@@ -1,0 +1,21 @@
+{
+  "HumanML3D": {
+    "train": 22326,
+    "val": 1400,
+    "test": 4198
+  },
+  "AIST++": {
+    "train": 952,
+    "val": 20,
+    "test": 20
+  },
+  "FineDance": {
+    "train": 183,
+    "test": 19
+  },
+  "BEAT2": {
+    "test": 265,
+    "train": 1093,
+    "val": 106
+  }
+}

@@ -1,0 +1,15 @@
+# Measured numerical environment. Python3.10, CPU evaluation.
+numpy==1.23.5
+scipy==1.10.1
+torch==2.6.0
+smplx==0.1.28
+librosa==0.10.2.post1
+soundfile==0.14.0
+numba==0.60.0
+tqdm==4.70.0
+matplotlib==3.10.9
+scikit-learn==1.7.2
+einops==0.8.2
+omegaconf==2.3.1
+wget==3.2
+opencv-python-headless==4.10.0.84

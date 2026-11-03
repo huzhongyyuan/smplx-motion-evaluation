@@ -1,0 +1,32 @@
+{
+  "protocol": "LODGE published inference list,20 IDs including120; separate from filtered loader19",
+  "source": "upstream/LODGE/infer_lodge.py",
+  "source_sha256": "e8a28118156bf071552944ff98cdf2bd8679a41e0cf590b443d54041e295f476",
+  "source_revision": "094b524bd41d422b8a912934999aa5996ff1e931",
+  "source_ids": [
+    "063",
+    "193",
+    "132",
+    "143",
+    "036",
+    "098",
+    "198",
+    "130",
+    "012",
+    "120",
+    "179",
+    "065",
+    "137",
+    "161",
+    "092",
+    "037",
+    "109",
+    "204",
+    "144",
+    "211"
+  ],
+  "excluded_by_loader_ignore": [
+    "120"
+  ],
+  "actual_paper_output_membership_verified": false
+}

@@ -1,0 +1,12 @@
+{
+  "status": "AUTHOR_TENSORS_AND_NORMALIZATION_INSTALLED_AND_VERIFIED",
+  "original_checkpoint_sha256": "881e45bea6fb84b15eca6e7cdd75d602b58a72f2038c223ee96ab75d4f684ada",
+  "installed_checkpoint_sha256": "4d08626fcbee25e4794ccc4ad8e96954fd4fd5a1df15f304884c95b1abb697ab",
+  "epoch": 28,
+  "normalization": {
+    "mean.npy": "0bdb5ba69a3a9e34d71990db15bc535ebc024c8d95ddb5574196f96058faa7d3",
+    "std.npy": "6a5f7d60301c9465972fc225f8ad0ee8f957e7720431189123eb6d15873a9557"
+  },
+  "exact_tensor_equality": true,
+  "source_url": "https://drive.usercontent.google.com/download?id=1IgrFCnxeg4olBtURUHimzS03ZI0df_6W&export=download&confirm=t"
+}

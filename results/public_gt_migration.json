@@ -1,0 +1,90 @@
+{
+  "status": "PUBLIC_GT_RELEASE_VERIFIED",
+  "verified_at": "2026-11-03T07:00:36.976504+00:00",
+  "core_tests_passed": 29,
+  "historical_asset_tests_passed": 3,
+  "source_validation_summary_sha256": "5c5dfe25ab1ffa2b59596cdcd9aa493058c05614c17c1d5a1fa07671b7059e0d",
+  "final_test_log_sha256": "3e0883749ff63fbb40501a694ed9ee6b0983750499993bcde5907645bf883320",
+  "source_lock_sha256": "71026b363b090ecddb8af8000c88e4d0d0e576d0e495f22670b98e473435bd08",
+  "source_files": 95,
+  "previous_source_files": 531,
+  "retained_author_hashes_unchanged": true,
+  "assets_verified": 10,
+  "own_code_sha256": {
+    "adapters.py": "467b460268ceadabfd50a16e5aa58540117ad96cf9ee95020ceca9d5450a7f06",
+    "aist30.py": "de9a5e87592371febc529d2be0f0597c7e08b0afd109441029050aa2c330c974",
+    "aist_smplx.py": "ff49c259cdc4c2ae2a2719cd9570e6018a13d2237e5f680b091060813beb8914",
+    "assets_lock.py": "6d8de06c53e799a7632ef081f9e51833f152c87e021ecefc62767a362f258e0e",
+    "beat2024.py": "e903eec2c796dd9be3082f20efae9bbe281438432b3153bec76a2a60300a51ec",
+    "check_release.py": "9a91117b83b8c335f04c08a209d3c82fecbc6e42023bc118180402a67f4b3a3a",
+    "configure.py": "4bb6a03faf7392345c7db813ca6c9087c4b9396a6712ea43dbeb9fcb6ade7f48",
+    "contracts.py": "c6910ca70d60149a34c1980ef1c5a953f23df654f2578dbd21be1d0f689892ac",
+    "evaluate.py": "7da755f5983cfef14bd74079695dcc6bbefcb92c8ff6aff68969f1e1a70597ae",
+    "evaluator_common.py": "c976c7ff2f0a504b453717501f1c35a5f785efd5612879d40af8ff57633250c3",
+    "fetch_upstream.py": "ec47ab1c9e7409abb056029dce293b86998fc3ee20dd28727efcc4564e9abe5e",
+    "gt.py": "0d9c0b6eed597e373eb787e3e92c819f493336c75610e74f8749fa6f628dd851",
+    "hml_generated.py": "bc5c9caa8ddb29fc8e14b5754edb2df563a34d01396d4f7b9925418d69ec3c30",
+    "hml_plan.py": "e990767497ac4dfef36aa88aa19c6b05a3806e8568ced56bf4e845829025c0d4",
+    "hml_sources.py": "39bef0942d608f2eeb588c81550c1ab75788dd3be2cb9e70a8e64a3a9db18b8d",
+    "hml_time.py": "319a552b862fb40a07e04faa4d759c9e67d474b993153767cda1f67f466968e0",
+    "hml_time_probe.py": "cd2e09b8d6d8919f46f5860ee2a95c7cc32e4757309626f879d9e5de3755f540",
+    "lodge_gt.py": "140d2b5fe9d6129180452ab507fd8a4561d2f870eec3650d377fe68681ca3ce3",
+    "official_preprocess.py": "c027fd459703b220db49986080a004ffbc868c503c024b4a58137fac4be03764",
+    "prepare_beat2024.py": "39bc5250b0f04da9b04d22114b7cbd3e8c461e5e9bb412b16f71bef1fedfb607",
+    "prepare_local_assets.py": "954cdae5882b3ad410347ffc910bb7550d5911836a4cdcb66208257071f88c7a",
+    "report.py": "a0269a665f58c098f76e48ec0469a0ca3812c49b99657093ab2ec97165ca0670",
+    "score_worker.py": "65fd5eb98d54cf1c9ddb2f431b8785318292a1c58280bde0bd08bc3ebd2a3370",
+    "source_lock.py": "5770cd466bc5e4797a98758c43f2bbde0310df1e6425287e4878f6c8bfbe824d",
+    "test_aist30.py": "29022d64a14322e99c5f82d6375911fce12c970a1b58fa1a040d8dcfbb1c6c86",
+    "test_beat2024.py": "7c8d01a706a0dae99d728576f648b819d82bdbccefbf8a8081a4e6c80d16505e",
+    "test_beat_report.py": "b739c2f53eaa45bc5dfb025c7b88970b252387dcaff494d129bd494282f50022",
+    "test_contracts.py": "18654c196d4642a1012c8c6eeaa3089a27dd753bf060d10a7d1f66f4fd37bb83",
+    "test_gt_results.py": "9a537eb447f0078411c64a6a45d85c87974166676cccf2aade68e9340e69114e",
+    "test_hml_sources.py": "58e511ce831a33e59d8c00d1723814b3d7a58a43e6dad234ebb93e15528e1c5a",
+    "test_hml_time.py": "a22bb827694781db265fa7b301b743cd5dae085b913ca4fc89e443e6e0100643",
+    "test_metric_transport.py": "bb45937ef39c60f7ea4c28009fbc2403b0bfbcc838f162ecd0c3c9f13cd625b8",
+    "test_protocol.py": "1e11fb91c14264eed8ce1426a2b77af76cd28ee507fb292464144ca815410bcb",
+    "test_release_metadata.py": "c06a71c7378929dc52e6377bd1379d1818f2ee03a22f2c5d7d43ad7f1f327e85"
+  },
+  "finedance_metrics": {
+    "Divk": 9.728691849938494,
+    "Divg": 7.441712841724804
+  },
+  "beat_metrics": {
+    "BC": 0.6867171335676296,
+    "L1div": 13.070166015625
+  },
+  "beat_sources": 15,
+  "beat_motion_frames": 28680,
+  "beat_bc_frames": 26880,
+  "per_source_beat_metrics_exactly_equal": true,
+  "aist_real3": {
+    "status": "REAL3_GEOMETRY_AND_FEATURE_CONTROL_PASSED",
+    "sources": [
+      {
+        "source_id": "gBR_sBM_cAll_d04_mBR0_ch01",
+        "frames": 360,
+        "max_full_model_error_m": 2.384185791015625e-07,
+        "features_exactly_equal": true
+      },
+      {
+        "source_id": "gBR_sBM_cAll_d04_mBR0_ch02",
+        "frames": 360,
+        "max_full_model_error_m": 2.384185791015625e-07,
+        "features_exactly_equal": true
+      },
+      {
+        "source_id": "gBR_sBM_cAll_d05_mBR0_ch01",
+        "frames": 360,
+        "max_full_model_error_m": 2.384185791015625e-07,
+        "features_exactly_equal": true
+      }
+    ],
+    "scope": "small migration control, not a new992-source evaluation"
+  },
+  "hml_scope": "Archived final20 repetitions independently recomputed, not rerun here",
+  "aist_scope": "Three real sources; full992 archived result reused, no new full rerun",
+  "setup_scope": "Reused existing frozen authority source catalog; not a new30582-file audit or fresh-machine full run",
+  "no_gpu": true,
+  "no_training_changes": true
+}

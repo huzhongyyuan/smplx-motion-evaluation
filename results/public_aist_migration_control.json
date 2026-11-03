@@ -1,0 +1,24 @@
+{
+  "status": "REAL3_GEOMETRY_AND_FEATURE_CONTROL_PASSED",
+  "sources": [
+    {
+      "source_id": "gBR_sBM_cAll_d04_mBR0_ch01",
+      "frames": 360,
+      "max_full_model_error_m": 2.384185791015625e-07,
+      "features_exactly_equal": true
+    },
+    {
+      "source_id": "gBR_sBM_cAll_d04_mBR0_ch02",
+      "frames": 360,
+      "max_full_model_error_m": 2.384185791015625e-07,
+      "features_exactly_equal": true
+    },
+    {
+      "source_id": "gBR_sBM_cAll_d05_mBR0_ch01",
+      "frames": 360,
+      "max_full_model_error_m": 2.384185791015625e-07,
+      "features_exactly_equal": true
+    }
+  ],
+  "scope": "small migration control, not a new992-source evaluation"
+}

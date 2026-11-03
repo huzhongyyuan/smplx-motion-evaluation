@@ -1,0 +1,19 @@
+{
+  "status": "ARCHIVED_MEASURED_GT",
+  "dataset": "FineDance",
+  "profile": "lodge_published202_gt",
+  "samples": 202,
+  "metrics": {
+    "Divk": 9.728691849938494,
+    "Divg": 7.441712841724804
+  },
+  "source_result_sha256": "335853fbd7374adb30c26ef94051e36bb35d9e9c7f95dd5a6993862a19728d80",
+  "reported_fields": [
+    "metrics.div_k_gt",
+    "metrics.div_m_gt"
+  ],
+  "reference_metadata_sha256": "350a96715ad06ed1963cdbf80fbc20b073d1dbf090f369699afa050df3a4f891",
+  "paper_gt_fid": null,
+  "raw_motion_feature_equality_verified": false,
+  "scope": "Author published202 feature reference in the recorded LODGE metric call; not TEST19 diversity"
+}
