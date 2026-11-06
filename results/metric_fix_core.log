@@ -1,0 +1,46 @@
+test_absolute_clock (test_contracts.BoundaryTests) ... ok
+test_body_only_fingers_default_wrists_preserved (test_contracts.BoundaryTests) ... ok
+test_no_endpoint_stretch_and_no_extrapolation (test_contracts.BoundaryTests) ... ok
+test_packed_converter_shape_is_explicit_and_not30_betas (test_contracts.BoundaryTests) ... ok
+test_reject_reflection (test_contracts.BoundaryTests) ... ok
+test_reject_wrong_hand_arm_and_source (test_contracts.BoundaryTests) ... ok
+test_shortest_arc_and_linear_world_displacement (test_contracts.BoundaryTests) ... ok
+test_world_fixed_child_not_rotated_by_ancestor_factorization (test_contracts.BoundaryTests) ... ok
+test_clock_selection_is_exact_and_has_no_endpoint_fill (test_aist30.Aist30Tests) ... ok
+test_linear_motion_uses_seconds (test_aist30.Aist30Tests) ... ok
+test_manual_all_velocity_functions_use_seconds (test_aist30.Aist30Tests) ... ok
+test_upstream_defaults_unchanged (test_aist30.Aist30Tests) ... ok
+test_wrong_reference_is_rejected (test_aist30.Aist30Tests) ... ok
+test_manifest_source_and_digest (test_hml_sources.NativeSources) ... ok
+test_nonfinite_source_is_rejected (test_hml_sources.NativeSources) ... ok
+test_nonfinite_complex_is_rejected (test_metric_transport.MetricTransport) ... ok
+test_official_complex_is_lossless (test_metric_transport.MetricTransport) ... ok
+test_real_metrics_stay_real (test_metric_transport.MetricTransport) ... ok
+test_no_tail_fill (test_hml_time.TimeTests) ... ok
+test_units_rotations_and_common_times (test_hml_time.TimeTests) ... ok
+test_exact_coverage_no_duplicates_or_private_paths (test_release_metadata.PublicMetadataTests) ... ok
+test_lodge_loader19_and_inference20_are_explicit (test_release_metadata.PublicMetadataTests) ... ok
+test_speaker2_roles_are_original_roles (test_release_metadata.PublicMetadataTests) ... ok
+test_previous_or_missing_profiles_are_rejected (test_beat_report.BeatReportTests) ... ok
+test_support_must_match_and_predictions_can_pair (test_beat_report.BeatReportTests) ... ok
+test_aist_test_and_val_roles_remain_separate (test_gt_results.GTResultsTests) ... ok
+test_all_four_recipes_link_exact_archives (test_gt_results.GTResultsTests) ... ok
+test_beat_legacy_frames_and_display_recompute (test_gt_results.GTResultsTests) ... ok
+test_current_aist_scores_are_unchanged_smplx_branches_only (test_gt_results.GTResultsTests) ... ok
+test_hml_final20_statistics_recompute (test_gt_results.GTResultsTests) ... ok
+test_legacy_mapping_preserves_hashes_and_replacements (test_gt_results.GTResultsTests) ... ok
+test_lodge_gt202_is_not_loader_test19 (test_gt_results.GTResultsTests) ... ok
+test_aist_numeric_functions_unchanged_from_measured_source (test_current_protocols.CurrentProtocolTests) ... ok
+test_beat_default_is_accepted_speaker2_2024 (test_current_protocols.CurrentProtocolTests) ... ok
+test_other_datasets_keep_their_own_membership (test_current_protocols.CurrentProtocolTests) ... ok
+test_previous_beat_selectors_and_aist_smpl_entry_are_rejected (test_current_protocols.CurrentProtocolTests) ... ok
+test_body_relative_convention_and_invalid_inputs (test_corrected_kinetic.PhysicalKineticTests) ... ok
+test_constant_velocity_and_quadratic_motion (test_corrected_kinetic.PhysicalKineticTests) ... ok
+test_old_features_and_wrong_fps_are_not_motion_inputs (test_corrected_kinetic.PhysicalKineticTests) ... ok
+test_real_extractors_static_pose_and_translation_invariance (test_corrected_kinetic.PhysicalKineticTests) ... ok
+test_static_nonzero_pose (test_corrected_kinetic.PhysicalKineticTests) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 0.919s
+
+OK

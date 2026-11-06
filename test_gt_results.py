@@ -61,19 +61,21 @@ class GTResultsTests(unittest.TestCase):
 
     def test_aist_test_and_val_roles_remain_separate(self):
         result = json.loads((ROOT/'results/aist_smplx30.json').read_text())
-        self.assertEqual(len(result['sources']), 992)
+        self.assertEqual(len(result['sources']), 40)
         members = json.loads((ROOT/'metadata/gt_eval_members.json').read_text())['AIST++']
         self.assertEqual(len(members['test']), 20)
         self.assertEqual(len(members['supplement_eval40']), 40)
         self.assertTrue(set(members['test']).isdisjoint(members['val']))
-        self.assertIn('smplx_test20_vs_train952', result['metrics'])
-        self.assertIn('smplx_eval40_vs_train952', result['metrics'])
+        self.assertIn('smplx_test20_vs_full1363', result['metrics'])
+        self.assertIn('smplx_eval40_vs_full1363', result['metrics'])
 
-    def test_current_aist_scores_are_unchanged_smplx_branches_only(self):
+    def test_current_aist_full_reference_is_bound_and_old_scores_preserved(self):
         current = json.loads((ROOT/'results/aist_smplx30.json').read_text())
-        archived = json.loads((ROOT/current['historical_comparison']).read_text())
-        self.assertEqual(current['metrics'], {k:v for k,v in archived['metrics'].items() if k.startswith('smplx_')})
-        self.assertEqual(current['sources'], archived['sources'])
+        frozen = json.loads((ROOT/'metadata/aist_reference1363.json').read_text())
+        self.assertEqual(current['protocol']['reference_sources'],1363)
+        self.assertEqual(current['protocol']['reference_receipt_sha256'],frozen['receipt_sha256'])
+        archived = json.loads((ROOT/'legacy/aist_train952/aist_smplx30.json').read_text())
+        self.assertIn('smplx_eval40_vs_train952',archived['metrics'])
         self.assertEqual(len(current['metrics']), 2)
 
     def test_legacy_mapping_preserves_hashes_and_replacements(self):

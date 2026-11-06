@@ -1,5 +1,15 @@
 # Verification scope
 
+2026-11-06 protocol migration: current AIST scoring uses one SHA-pinned full1363
+actual-SMPL-X30 reference. The TRAIN952 checks and values below describe the
+historical release. Current execution/acceptance evidence is recorded in
+`results/aist_full1363_validation.json`; reference data never change TRAIN membership.
+
+The portable source also passed44 core and4 BEAT asset checks on40. Its TEST20
+entry reproduced both direct-GT and SOMA-roundtrip TEST20 metrics exactly from
+the all40 run. [Entry receipt](results/aist_full1363_entry_validation.json)
+pins that source and results. This does not validate tokenizer generation.
+
 Existing GT evidence is in `results/`; exact recipe/result hashes are indexed in `results/gt_index.json`. The release does not replace source experiment evidence with unit-test success.
 
 ## Metric diagnostics, 2026-11-03
@@ -11,6 +21,15 @@ passed with the pinned real author assets: exact historical BC compatibility,
 caller-array immutability, repeat scoring and correctly cropped threshold indices.
 Execution used CPU0/1 with CUDA hidden. See [metric corrections](docs/METRIC_CORRECTIONS.md)
 for the distinction between frozen paper scores and corrected diagnostics.
+
+Deployment verification at2026-11-03T16:04:21Z passed **41 core tests and4
+BEAT2024 tests** on the live entry. The [receipt](results/metric_fix_validation.json)
+binds the tested file hashes and the19-source paired identity check; raw test
+outputs are [core](results/metric_fix_core.log) and
+[BEAT2024](results/metric_fix_beat2024.log). The previous owned wrappers were
+archived, and the server research-root evaluation/scoring/check commands now
+route to the same published runner. Frozen upstream author code remains solely
+for labelled paper compatibility; it was not silently replaced or deleted.
 
 The real FineDance19 identity control is in
 [fd19_physical_identity.json](results/fd19_physical_identity.json).

@@ -1,0 +1,9 @@
+test_author_asset_identity (test_beat2024.Beat2024Tests) ... ok
+test_compatibility_bc_is_exact_but_caller_is_not_mutated (test_beat2024.Beat2024Tests) ... ok
+test_exact_seconds_and_chunk_support (test_beat2024.Beat2024Tests) ... ok
+test_threshold_uses_the_cropped_minimum_frame (test_beat2024.Beat2024Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.353s
+
+OK

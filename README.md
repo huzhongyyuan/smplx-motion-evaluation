@@ -13,11 +13,15 @@
 | 数据集 | 评分输入 | 实现 | 范围 |
 |---|---|---|---|
 | HumanML3D | 作者20 FPS/263D | T2M | body |
-| AIST++ | 真实SMPL-X30，固定24点 | Bailando公式＋显式30 FPS时间参数 | body；与SMPL60论文协议分开 |
+| AIST++ | 真实SMPL-X30，固定24点、完整1363参考 | Bailando公式＋显式30 FPS时间参数 | body；TRAIN仍952；与60FPS论文协议分开 |
 | FineDance | LODGE发布202源GT特征池；动作侧用原预处理/FK | LODGE原版 | body；TEST19诊断单列 |
 | BEAT2 | SMPL-X30、speaker2 TEST15 | 固定EMAGE2024兼容BC/L1 | body＋hands；当前协议不含FGD |
 
 **不是四库全都原生SMPL-X。** 只有BEAT2评手指；其他三库手指默认，保留手腕和手臂。
+
+SOMA输出先使用与正向producer匹配的逆转换，再走本仓库同一个SMPL-X评测入口。
+旋转transport生成的SOMA不能用表面拟合逆向替代。转换、默认shape、手部来源、
+root缩放和外部轨迹旁路须分别记录；见[转换输入约定](docs/CONVERSION.md)。
 
 ## 安装与合法获取资产
 
@@ -44,6 +48,11 @@ python evaluate.py prepare-beat2024
 python evaluate.py check
 ```
 
+AIST++现用入口必须先准备同一份冻结的SMPL-X30完整1363参考特征：在配置的`links`中加入
+`assets/aist_smplx30_reference1363`→合法取得的本地冻结参考目录。目录须含
+`reference_receipt.json`和两类共2726份特征；成员、时钟、模型域与逐文件SHA均会检查。
+原生SMPL参考、60FPS参考及仅TRAIN952参考会被拒绝。参考数据与原始动作一样不随仓库分发。
+
 `configure`校验30,582个源的存在、作者HML263D的SHA和关键资产SHA，生成本机绝对路径manifest；这些本机路径、数据和模型均被Git忽略。配置不修改原始数据。
 
 ## 运行
@@ -58,13 +67,16 @@ python evaluate.py gt --dataset FineDance --output runs/lodge_gt202
 python evaluate.py gt --dataset BEAT2 --output runs/beat2024_gt15
 ```
 
+只有官方TEST20输出时，使用`aist-smplx --evaluation-split test`；默认`all`需要TEST20＋VAL20的40条，
+输出中保留两者角色。两种样本范围共用同一个1363参考及完全相同的打分器。
+
 详细speaker2、HumanML30 FPS诊断、条件计划、SMPL-X适配及SOMA/Tokenizer验收见中文说明和`--help`。每次使用全新输出目录，不覆盖结果；不自动重复启动失败Run。
 
 ## 当前GT结果
 
 | 协议 | 已有结果 | 说明 |
 |---|---|---|
-| AIST++ SMPL-X30 TEST20 / TRAIN952 | FIDk28.568973、FIDg16.844502、Divk8.295857、Divg8.088570 | 30 FPS适配协议；非原SMPL60论文复现 |
+| AIST++ SMPL-X30 TEST20 / 完整1363 | FIDk22.665583、FIDg14.462258、Divk8.151472、Divg7.828121 | 40条补充为17.964142／9.564903／8.078299／7.274017；旧TRAIN952数字归档 |
 | FineDance作者202源参考池 | Divk9.728692、Divg7.441713 | 对作者发布特征重算，按论文精度为9.73/7.44；未证明202条原动作全量重提一致 |
 | BEAT2 EMAGE2024兼容speaker2 TEST15 | BC raw0.686717（×10为6.867171）、L1div13.070166 | 用户接受近似复现；不含旧版FGD |
 | HumanML3D作者20 FPS TEST4198，20次 | R@1/2/3 0.512672/0.702338/0.797683；FID0.001632；Matching2.971407；Div9.550798 | 最终20轮，95%CI与每轮结果已归档 |

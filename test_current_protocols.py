@@ -49,6 +49,9 @@ class CurrentProtocolTests(unittest.TestCase):
         source = (ROOT/'aist_smplx.py').read_text()
         self.assertNotIn('native_aist_joints', source)
         self.assertIn("for domain in ('smplx',)", source)
+        self.assertIn('verify_reference(a.reference)', source)
+        self.assertIn('_vs_full1363', source)
+        self.assertNotIn('_vs_train952', source)
 
 
 if __name__ == '__main__':

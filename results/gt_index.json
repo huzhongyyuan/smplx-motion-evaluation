@@ -20,20 +20,20 @@
     },
     {
       "dataset": "AIST++",
-      "profile": "smplx30_test20_vs_train952",
+      "profile": "aist_smplx30_full1363_v1",
       "result": "results/aist_smplx30.json",
-      "branch": "metrics.smplx_test20_vs_train952",
-      "supplemental_branch": "metrics.smplx_eval40_vs_train952",
+      "branch": "metrics.smplx_test20_vs_full1363",
+      "supplemental_branch": "metrics.smplx_eval40_vs_full1363",
       "samples": 20,
-      "reference_sources": 952,
+      "reference_sources": 1363,
       "supplemental_sources": 40,
       "fps": 30,
       "body_hands": "body",
       "script": "aist_smplx.py",
       "scorer": "Bailando/utils/metrics_new.py",
-      "scope": "Explicit30 FPS SMPL-X protocol, not paperSMPL60",
-      "command": "python evaluate.py gt --dataset \"AIST++\" --output runs/smplx30_test20_vs_train952",
-      "result_sha256": "a1e0caf8d6c30b03e1a4d8a6c31df2d2457343b5de8ae50ec955c87f6875c857"
+      "scope": "Actual SMPL-X30, full1363 reference; TRAIN952 unchanged",
+      "command": "python evaluate.py gt --dataset \"AIST++\" --output runs/smplx30_test20_vs_full1363",
+      "result_sha256": "a36d7a27c648089b814d4dd869c48d5efdcd651f59cd9d40d4ae8d2eb4dd6dd8"
     },
     {
       "dataset": "FineDance",

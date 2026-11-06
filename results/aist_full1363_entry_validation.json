@@ -1,0 +1,61 @@
+{
+  "status": "PASS_GITHUB_SOURCE_TEST20_EQUIVALENCE",
+  "verified_at": "2026-11-06T09:08:30.144394+00:00",
+  "code_sha256": {
+    "configure.py": "4bb6a03faf7392345c7db813ca6c9087c4b9396a6712ea43dbeb9fcb6ade7f48",
+    "aist_reference.py": "dd26774f526db68de403c657c4f445afcde8598b7dba00988ab066058d1ec5f0",
+    "hml_plan.py": "e990767497ac4dfef36aa88aa19c6b05a3806e8568ced56bf4e845829025c0d4",
+    "evaluate.py": "0f015d210039eb516e567a4361431d94954e16eca0236db2a13af374a54f6aa8",
+    "test_current_protocols.py": "ccccecf9d6821a637d81d62f434923df1257dd312b33a218bf23ce3368d6b962",
+    "test_protocol.py": "0b316ed2fd694c79abc79ef9b38e3652247a329cb13ff49cf5b4c859b3e82e52",
+    "prepare_beat2024.py": "39bc5250b0f04da9b04d22114b7cbd3e8c461e5e9bb412b16f71bef1fedfb607",
+    "evaluator_common.py": "c976c7ff2f0a504b453717501f1c35a5f785efd5612879d40af8ff57633250c3",
+    "test_release_metadata.py": "c06a71c7378929dc52e6377bd1379d1818f2ee03a22f2c5d7d43ad7f1f327e85",
+    "adapters.py": "9dafa0e4aaff2a1a3e20229c462f68fee890f4255870d2568f5911dc9271cf62",
+    "test_beat_report.py": "efbfdbcb0e69760e548b5d6b079cd0c56887d89a8df30221875bb7deb521547c",
+    "score_worker.py": "4361cc1e797513a62359b7856756da317a62e742e16f0ba48e6a050f0fbb028d",
+    "corrected_kinetic.py": "5f36170e866b601403ed7c5459be7a09c20b4c06b286b5d782b07a3326f3d461",
+    "official_preprocess.py": "c027fd459703b220db49986080a004ffbc868c503c024b4a58137fac4be03764",
+    "test_gt_results.py": "0db5592306f9dcb02492899349f5c3fca93bf0354c8e1467f600576f91a26e97",
+    "beat2024.py": "e7f209783ffac3e03281d8a511e747774e5e112ee5a3a9310c6e37e20e87c5ea",
+    "lodge_gt.py": "f94de39045b1aa9457c7a1281937a5550e863269ad9f4f041cdc6696946426cc",
+    "aist_smplx.py": "6d0435c09a8d4a978abd1559650ea9a04ca3871788c779dea860dec2e84d603c",
+    "hml_sources.py": "39bef0942d608f2eeb588c81550c1ab75788dd3be2cb9e70a8e64a3a9db18b8d",
+    "test_hml_time.py": "a22bb827694781db265fa7b301b743cd5dae085b913ca4fc89e443e6e0100643",
+    "contracts.py": "c6910ca70d60149a34c1980ef1c5a953f23df654f2578dbd21be1d0f689892ac",
+    "fetch_upstream.py": "ec47ab1c9e7409abb056029dce293b86998fc3ee20dd28727efcc4564e9abe5e",
+    "test_contracts.py": "18654c196d4642a1012c8c6eeaa3089a27dd753bf060d10a7d1f66f4fd37bb83",
+    "test_corrected_kinetic.py": "fbb2c0e57bc61edbc315c5cf6a0b2a6ed4d5c4073a980d910c69f603fccb1da6",
+    "assets_lock.py": "6d8de06c53e799a7632ef081f9e51833f152c87e021ecefc62767a362f258e0e",
+    "report.py": "cde1b9e9b255a4437502b188511606cf6670feee1a5b348865ef0b9779f47671",
+    "test_metric_transport.py": "bb45937ef39c60f7ea4c28009fbc2403b0bfbcc838f162ecd0c3c9f13cd625b8",
+    "check_release.py": "5fd94cc6beb5ffbd72f0511cdb9306c4eeacfd2349689d36039cb722128a2004",
+    "hml_time_probe.py": "cd2e09b8d6d8919f46f5860ee2a95c7cc32e4757309626f879d9e5de3755f540",
+    "gt.py": "26017506b0520a046abd9f27a7930f80efb1d4fbd658584425969c2304911a8a",
+    "prepare_local_assets.py": "954cdae5882b3ad410347ffc910bb7550d5911836a4cdcb66208257071f88c7a",
+    "test_hml_sources.py": "58e511ce831a33e59d8c00d1723814b3d7a58a43e6dad234ebb93e15528e1c5a",
+    "source_lock.py": "5770cd466bc5e4797a98758c43f2bbde0310df1e6425287e4878f6c8bfbe824d",
+    "aist30.py": "de9a5e87592371febc529d2be0f0597c7e08b0afd109441029050aa2c330c974",
+    "test_aist_reference.py": "cfe6e465ab8ccb38b5e74253b1f36e47e75050cbebf704b8affcdb01465fcf07",
+    "hml_time.py": "319a552b862fb40a07e04faa4d759c9e67d474b993153767cda1f67f466968e0",
+    "metric_issues.py": "9dad063e3da1a09280fb300f92a9bf9315596660556817de6316645c4ca5cc50",
+    "test_beat2024.py": "b439930aeefc5bf37115a6ffbdcfd47e8e34047d7943fc411c0035ee725509e8",
+    "hml_generated.py": "bc5c9caa8ddb29fc8e14b5754edb2df563a34d01396d4f7b9925418d69ec3c30",
+    "test_aist30.py": "29022d64a14322e99c5f82d6375911fce12c970a1b58fa1a040d8dcfbb1c6c86"
+  },
+  "logs": [
+    {
+      "path": "/data2/home/guolijie/human_stream_official_eval_20261102/runs/github_full1363_core_20261106_v2.log",
+      "sha256": "f01fc4787d231f45b7e37d7724bd7f37fadc034739ae7d2a59a0d4fdc7ffdf5b"
+    },
+    {
+      "path": "/data2/home/guolijie/human_stream_official_eval_20261102/runs/github_full1363_beat_20261106_v2.log",
+      "sha256": "939259fb2f7a30d527dce2442b4f0a4f306aefcb0ecd9c1647e7e9db25a0649b"
+    }
+  ],
+  "paired_result_sha256": "5bbd7cc08df6a7109b2fdf15304984962e9a3295d5d1043d206377d267b4b379",
+  "original_all40_result_sha256": "8caf560a25bbe3b07530fdac8ebf58695b51cf2f761be1f28d109fecbf799691",
+  "unchanged_test20_metrics": true,
+  "training_changed": false,
+  "gpu": false
+}

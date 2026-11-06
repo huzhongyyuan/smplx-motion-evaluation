@@ -1,0 +1,71 @@
+{
+  "status": "DEPLOYED_TECHNICAL_CHECKS_PASSED",
+  "verified_at": "2026-11-03T16:04:21.344197+00:00",
+  "cpu_affinity": [
+    0,
+    1
+  ],
+  "cuda_visible_devices": "",
+  "checks": [
+    {
+      "name": "core",
+      "arguments": [
+        "evaluate.py",
+        "check"
+      ],
+      "tests": 41,
+      "exit_code": 0,
+      "started_at": "2026-11-03T16:04:14.790161+00:00",
+      "finished_at": "2026-11-03T16:04:17.920492+00:00",
+      "log_sha256": "87414ca7df4f0e81ce1077f7bb7756a5c7aa08d683853431b29f4a75fa4f588a"
+    },
+    {
+      "name": "beat2024",
+      "arguments": [
+        "-m",
+        "unittest",
+        "-v",
+        "test_beat2024"
+      ],
+      "tests": 4,
+      "exit_code": 0,
+      "started_at": "2026-11-03T16:04:17.920617+00:00",
+      "finished_at": "2026-11-03T16:04:21.316421+00:00",
+      "log_sha256": "4000b49b42cf8cb0e56df952dc37e9326402ad96c0756c9d258ae990d2559802"
+    }
+  ],
+  "public_code_sha256": {
+    "README.md": "43a5176e98bebc011c5f4418d9bdf35fca28bba1ea8f5264a0cfd6ce0556448e",
+    "VALIDATION.md": "5e6a70f7e3626cdd2a22855f9200119dd8b9774371c95bddbc1b44bc8d7ccc21",
+    "aist_smplx.py": "6099873588f1e580d5128eb97dea8972c7e5b965fb25917af3a8541e4f129cbd",
+    "beat2024.py": "e7f209783ffac3e03281d8a511e747774e5e112ee5a3a9310c6e37e20e87c5ea",
+    "check_release.py": "f8e0f8662d446a476634607429661288e559dc827bac5609e24fee0b2aa7fed8",
+    "corrected_kinetic.py": "5f36170e866b601403ed7c5459be7a09c20b4c06b286b5d782b07a3326f3d461",
+    "docs/METRIC_CORRECTIONS.md": "00f2b014f225a882bc7ca0e4e74ce1b50b0445fd3cedecf760214aa4fe044c9a",
+    "evaluate.py": "0f015d210039eb516e567a4361431d94954e16eca0236db2a13af374a54f6aa8",
+    "lodge_gt.py": "f94de39045b1aa9457c7a1281937a5550e863269ad9f4f041cdc6696946426cc",
+    "metric_issues.py": "9dad063e3da1a09280fb300f92a9bf9315596660556817de6316645c4ca5cc50",
+    "report.py": "cde1b9e9b255a4437502b188511606cf6670feee1a5b348865ef0b9779f47671",
+    "results/fd19_physical_identity.json": "3749209a0eef4d965d2f57680f98c32214e441d9eaf41b8c2fffe4ac79625b25",
+    "score_worker.py": "fdad82101f66ca133ce96354fe9698fcfd786394086717c4f072bc8b7064b6d5",
+    "test_beat2024.py": "b439930aeefc5bf37115a6ffbdcfd47e8e34047d7943fc411c0035ee725509e8",
+    "test_corrected_kinetic.py": "fbb2c0e57bc61edbc315c5cf6a0b2a6ed4d5c4073a980d910c69f603fccb1da6"
+  },
+  "fine_dance_identity": {
+    "sources": 19,
+    "paired_input_hashes_equal": true,
+    "paired_features_exactly_equal": true,
+    "result_sha256": "3749209a0eef4d965d2f57680f98c32214e441d9eaf41b8c2fffe4ac79625b25",
+    "metrics": {
+      "FIDk_corrected": {
+        "type": "complex",
+        "real": -7.83825066719146e-06,
+        "imag": -4.658130792098806e-06
+      },
+      "Divk_corrected": 11.14637233221043,
+      "reference_Divk_corrected": 11.14637233221043
+    }
+  },
+  "soma_conversion_parity": "NOT_VERIFIED: exact13-case conversion export manifest is unavailable",
+  "preserved_author_sources": "Frozen paper-compatibility dependency; not corrected physical diagnostics"
+}

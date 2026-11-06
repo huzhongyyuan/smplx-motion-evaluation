@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "scope": "Measured GT recipes, not generation or SOMA/tokenizer quality",
+  "members": "metadata/gt_eval_members.json",
+  "recipes": [
+    {
+      "dataset": "HumanML3D",
+      "profile": "t2m_author20_test4198_rep20",
+      "result": "results/hml_gt20.json",
+      "branch": "metric_summary.*.candidate_native_gt",
+      "samples": 4198,
+      "repetitions": 20,
+      "fps": 20,
+      "body_hands": "body",
+      "script": "score_worker.py",
+      "scorer": "T2M/final_evaluations.py",
+      "scope": "Author263D and evaluator, final20 replications",
+      "command": "python evaluate.py gt --dataset \"HumanML3D\" --output runs/t2m_author20_test4198_rep20",
+      "result_sha256": "091fadbbfcb01a28a263593fbd57e709c984e47fcf49f9490ef01e2b280c97ff"
+    },
+    {
+      "dataset": "AIST++",
+      "profile": "smplx30_test20_vs_train952",
+      "result": "results/aist_smplx30.json",
+      "branch": "metrics.smplx_test20_vs_train952",
+      "supplemental_branch": "metrics.smplx_eval40_vs_train952",
+      "samples": 20,
+      "reference_sources": 952,
+      "supplemental_sources": 40,
+      "fps": 30,
+      "body_hands": "body",
+      "script": "aist_smplx.py",
+      "scorer": "Bailando/utils/metrics_new.py",
+      "scope": "Explicit30 FPS SMPL-X protocol, not paperSMPL60",
+      "command": "python evaluate.py gt --dataset \"AIST++\" --output runs/smplx30_test20_vs_train952",
+      "result_sha256": "a1e0caf8d6c30b03e1a4d8a6c31df2d2457343b5de8ae50ec955c87f6875c857"
+    },
+    {
+      "dataset": "FineDance",
+      "profile": "lodge_published202_gt",
+      "result": "results/finedance_lodge202_gt.json",
+      "branch": "metrics",
+      "samples": 202,
+      "fps": 30,
+      "body_hands": "body",
+      "script": "lodge_gt.py",
+      "scorer": "LODGE/metric/metrics_finedance.py",
+      "scope": "Author published GT feature pool, original LODGE normalization/constants; TEST19 supplemental",
+      "command": "python evaluate.py gt --dataset \"FineDance\" --output runs/lodge_published202_gt",
+      "result_sha256": "3ff165a4ededb3d5ca78ad49519850c815cff577ab05ced2dffa16d8e62ab2db"
+    },
+    {
+      "dataset": "BEAT2",
+      "profile": "emage2024_bc_l1_speaker2_test15",
+      "result": "results/beat2024_speaker2_gt.json",
+      "branch": "metrics",
+      "samples": 15,
+      "fps": 30,
+      "body_hands": "body+hands",
+      "script": "beat2024.py",
+      "scorer": "EMAGE_2024/utils/metric.py",
+      "scope": "Accepted approximate paper reproduction; raw BC and raw\u00d710 both recorded; no legacyFGD",
+      "command": "python evaluate.py gt --dataset \"BEAT2\" --output runs/emage2024_bc_l1_speaker2_test15",
+      "result_sha256": "61f769240dd574684885ff70b887c69a07dc40f1e7af1ee3f75dcdc531e3fb79"
+    }
+  ]
+}

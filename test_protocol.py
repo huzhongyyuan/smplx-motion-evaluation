@@ -6,7 +6,7 @@ from evaluator_common import ROOT
 from source_lock import sha
 
 def validate_test_protocol(args,rows):
-    require(args.dataset!='AIST++','Use aist-smplx: actual SMPL-X geometry and TRAIN952 reference')
+    require(args.dataset!='AIST++','Use aist-smplx: actual SMPL-X30 geometry and full1363 reference')
     if args.dataset == 'BEAT2':
         require(args.membership_profile == 'emage_author_speaker2', 'BEAT2 uses only the frozen speaker2 protocol')
     if args.split!='test': return dict(scope='TRAIN/VAL diagnostic; no formal TEST coverage claim')

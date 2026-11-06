@@ -5,7 +5,7 @@
 | 数据集 | 入口脚本 → 作者实现 | GT口径 | 对应结果 |
 |---|---|---|---|
 | HumanML3D | [score_worker.py](../score_worker.py) → T2M `final_evaluations.py` | 作者20 FPS/263D、TEST4198、20次、epoch28、batch32、unit4、Div300 | [hml_gt20.json](../results/hml_gt20.json)，取`candidate_native_gt` |
-| AIST++ | [aist_smplx.py](../aist_smplx.py) → Bailando指标＋显式30 FPS时间 | 两端真实SMPL-X30、严格TRAIN952参考、TEST20；40条补充单列 | [aist_smplx30.json](../results/aist_smplx30.json)，取`smplx_test20_vs_train952` |
+| AIST++ | [aist_smplx.py](../aist_smplx.py) → Bailando指标＋显式30 FPS时间 | 两端真实SMPL-X30、完整1363参考、TEST20；40条补充单列 | [aist_smplx30.json](../results/aist_smplx30.json)，取`smplx_test20_vs_full1363` |
 | FineDance | [lodge_gt.py](../lodge_gt.py) → LODGE `metrics_finedance.py` | 作者发布202源/404份特征，原normalization和特征常数 | [finedance_lodge202_gt.json](../results/finedance_lodge202_gt.json)，Divk9.728692/Divg7.441713 |
 | BEAT2 | [beat2024.py](../beat2024.py) → EMAGE2024 `utils/metric.py` | speaker2 TEST15、旧调用顺序/时间裁剪/音频；body＋hands | [beat2024_speaker2_gt.json](../results/beat2024_speaker2_gt.json)，BC0.686717/L1div13.070166 |
 
@@ -45,5 +45,9 @@ python evaluate.py score --dataset FineDance --split test \
 HML归档完整20次而非13次中间均值；4198个源经作者caption loader成为4648条，batch32/drop_last后每轮4640条。GT两条分支分别采样caption/crop，结果分支固定为`candidate_native_gt`，不择优选分支。
 
 AIST++为用户指定的SMPL-X30协议：原生60 FPS直接`[::2]`，不插值；默认shape/手、世界pelvis保持、固定24点。论文SMPL60数值单列，不能直接作相同口径比较。TEST20＋VAL20的40条结果只作补充，角色不改为40条TEST。
+
+2026-11-06起所有当前AIST入口共用`assets/aist_smplx30_reference1363`，逐文件验SHA及1363成员。
+参考源按作者camera mapping减ignore确定，整段提特征；训练仍只用TRAIN952。
+旧TRAIN952结果保留在`legacy/aist_train952/`，不得与新分数混表。60FPS参考特征、原生SMPL特征均不可代替本池。
 
 仅BEAT2评手。其他三库body，默认指姿态、保留腕/臂。原生GT、SOMA往返、Tokenizer重建、生成必须分开打分；本发布不把GT结果当SOMA重建验收。

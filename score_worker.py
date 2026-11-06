@@ -174,7 +174,7 @@ def parse_args(argv=None):
     p.add_argument('--membership-profile', choices=('all_official_sources','emage_author_speaker2'))
     args = p.parse_args(argv)
     if args.dataset == 'AIST++':
-        p.error('Use evaluate.py aist-smplx: the only current AIST++ protocol is SMPL-X30 / TRAIN952')
+        p.error('Use evaluate.py aist-smplx: the current AIST++ protocol is SMPL-X30 / full1363')
     args.beat_profile = 'emage2024_bc_l1' if args.dataset == 'BEAT2' else None
     if args.membership_profile is None:
         args.membership_profile = 'emage_author_speaker2' if args.dataset == 'BEAT2' else 'all_official_sources'
