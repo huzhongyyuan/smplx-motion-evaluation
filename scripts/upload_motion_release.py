@@ -6,6 +6,7 @@ No credentials are sent to the source server or stored in receipts. Existing
 assets are accepted only if size+GitHub SHA match; nothing is overwritten.
 """
 import argparse
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 import hashlib
 import http.client
 import json
@@ -30,18 +31,18 @@ def main():
     p.add_argument('--ssh-key',type=Path)
     p.add_argument('--remote-dir',type=Path,required=True)
     p.add_argument('--receipt',type=Path,required=True)
+    p.add_argument('--workers',type=int,choices=(1,2),default=1,
+                   help='At most two streams; SSH readers remain bound to CPU0/1')
     a=p.parse_args()
     index=json.loads(a.index.read_text());repo=index['repo']
     assert repo=='huzhongyyuan/smplx-motion-evaluation' and index['release_tag']=='motion30-20261106'
-    release=gh_json([f'repos/{repo}/releases/{a.release_id}'])
+    release=gh_json([f'repos/{repo}/releases/{a.release_id}?asset_snapshot={time.time_ns()}'])
     assert release['tag_name']==index['release_tag'] and release['draft'], 'Only this draft release may be populated'
     existing={x['name']:x for x in release['assets']}
+    assert len({r['name'] for r in index['assets']})==len(index['assets'])
     token=subprocess.run(['gh','auth','token','--hostname','github.com'],capture_output=True,text=True,check=True).stdout.strip()
     assert token
-    completed=[]
-    a.receipt.parent.mkdir(parents=True,exist_ok=True)
-    with a.receipt.open('x',buffering=1) as receipt:
-        for row in sorted(index['assets'],key=lambda r:(r['name']!='SHA256SUMS',r['name'])):
+    def upload(row):
             name=row['name']
             assert Path(name).name==name and len(row['sha256'])==64
             if name in existing:
@@ -84,11 +85,36 @@ def main():
                 finally:
                     source.stdout.close()
                     connection.close()
+                    if source.poll() is None:
+                        source.terminate()
+                        try:source.wait(timeout=5)
+                        except subprocess.TimeoutExpired:
+                            source.kill();source.wait()
                 print(json.dumps(dict(event='upload_verified',name=name,asset_id=asset['id'],
                                       bytes=sent,seconds=time.monotonic()-start)),flush=True)
             rec=dict(name=name,asset_id=asset['id'],bytes=asset['size'],sha256=row['sha256'],
                      github_digest=asset['digest'],url=asset['browser_download_url'],state=asset['state'])
-            receipt.write(json.dumps(rec)+'\n');completed.append(rec)
+            return rec
+    completed=[]
+    a.receipt.parent.mkdir(parents=True,exist_ok=True)
+    rows=iter(sorted(index['assets'],key=lambda r:(r['name']!='SHA256SUMS',r['name'])))
+    with a.receipt.open('x',buffering=1) as receipt, ThreadPoolExecutor(max_workers=a.workers) as pool:
+        active=set()
+        for _ in range(a.workers):
+            row=next(rows,None)
+            if row is not None:active.add(pool.submit(upload,row))
+        try:
+            while active:
+                ready,_=wait(active,return_when=FIRST_COMPLETED)
+                for future in ready:
+                    rec=future.result()
+                    receipt.write(json.dumps(rec)+'\n');completed.append(rec)
+                    active.remove(future)
+                    row=next(rows,None)
+                    if row is not None:active.add(pool.submit(upload,row))
+        except BaseException:
+            for future in active:future.cancel()
+            raise
     print(json.dumps(dict(status='ALL_DRAFT_ASSETS_UPLOADED_AND_DIGEST_VERIFIED',assets=len(completed),
                           bytes=sum(r['bytes'] for r in completed))),flush=True)
 
