@@ -1,0 +1,176 @@
+{
+  "status": "ALL_RELEASE_ASSETS_INDEPENDENTLY_MATCH_INDEX",
+  "verified_at": "2026-11-06T14:03:08.709950+00:00",
+  "release_id": 436491933,
+  "tag_name": "motion30-20261106",
+  "draft": false,
+  "target_commitish": "e7f155ead89da47b60519d6da688da9246cc86b2",
+  "published_at": "2026-11-06T14:02:24Z",
+  "assets": [
+    {
+      "name": "AISTpp-reference1363.tar.zst.part-000",
+      "id": 717155641,
+      "bytes": 701824,
+      "sha256": "b942bd3e8e0f92b210c5924ec7b373192b0f8af6c2cb2164603ab1d4caee3d2b",
+      "state": "uploaded"
+    },
+    {
+      "name": "AISTpp.tar.zst.part-000",
+      "id": 717155748,
+      "bytes": 528455957,
+      "sha256": "aa94e07bae4b4327ab728e95b438402196044e5895291ced34206677ecf40c87",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-000",
+      "id": 717166680,
+      "bytes": 1000000000,
+      "sha256": "fcc093e2363918dfb3746fc1868eba821a17e77c06e45b0f90b74ff80dde0eed",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-001",
+      "id": 717166685,
+      "bytes": 1000000000,
+      "sha256": "f063d5a0968ac6720ad055c9462e812b2511f8f2e1cb6f184219025b56ff357b",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-002",
+      "id": 717181627,
+      "bytes": 1000000000,
+      "sha256": "5711e454cee156b96e2505351da25b96af9799833a28fbeff279ddaa223bb55b",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-003",
+      "id": 717226907,
+      "bytes": 1000000000,
+      "sha256": "d0e780b4fe02efeda1c8389335e4a7b124b02b7f1b7bc6daf08de44e33cbaad3",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-004",
+      "id": 717226049,
+      "bytes": 1000000000,
+      "sha256": "ddf39d3921fd2f1986dad103ca8fe07c400b05bfefb4eba1e6c4ea579c0cf430",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-005",
+      "id": 717250563,
+      "bytes": 1000000000,
+      "sha256": "abd88cc292dd0310080be9394ac700795ac412b0d7d9af112936f3771bcbcdab",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-006",
+      "id": 717251010,
+      "bytes": 1000000000,
+      "sha256": "4bd5258bb275d3eb089aa111bf2e8c23862161948fa15dc4e4078b8c918a4114",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-007",
+      "id": 717269986,
+      "bytes": 1000000000,
+      "sha256": "8251f60eca07c6e3381acf48b697e5d20b6e0c3229605ef356c689ef75860308",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-008",
+      "id": 717282475,
+      "bytes": 1000000000,
+      "sha256": "0dc49b76849444f07261460ccfc2fa2a2eb6e91a75801d4ce63a2f7065d30395",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-009",
+      "id": 717287614,
+      "bytes": 1000000000,
+      "sha256": "94cd9ae1641711b97f9749d74cdf8fadc130865a31dd5f51b25c22008506b87a",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-010",
+      "id": 717302396,
+      "bytes": 1000000000,
+      "sha256": "b02b18fbcea72c2d68dc5ac9312615c30ad6b872e83ba3c88544dfa1e9a47114",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-011",
+      "id": 717307062,
+      "bytes": 1000000000,
+      "sha256": "9f09e6e3f3eb3fbaca50c45eb1eddaaa35987dff071d9c4b02087bea63486670",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-012",
+      "id": 717327403,
+      "bytes": 1000000000,
+      "sha256": "9dca7945abae2a0b2971f6d02e1e9414ded6bec727a009dcf97142a9f7e43066",
+      "state": "uploaded"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-013",
+      "id": 717324317,
+      "bytes": 195714961,
+      "sha256": "7d00857f2835d7cf5008542b72068cdb9d73fea57c6f312e3b76e2d2d5651072",
+      "state": "uploaded"
+    },
+    {
+      "name": "FineDance.tar.zst.part-000",
+      "id": 717331741,
+      "bytes": 1000000000,
+      "sha256": "08108747b536fab66c3387eb298384723538ce2544f415268427b81b7e61fe7f",
+      "state": "uploaded"
+    },
+    {
+      "name": "FineDance.tar.zst.part-001",
+      "id": 717345346,
+      "bytes": 1000000000,
+      "sha256": "20e628453031108ca0baa2ae3600ae3b5d0471e0db29479b9e9a88c5e85a9a94",
+      "state": "uploaded"
+    },
+    {
+      "name": "FineDance.tar.zst.part-002",
+      "id": 717347082,
+      "bytes": 287700307,
+      "sha256": "fce5cb1fd2b293f3d9e85df9e91a02d87a259f7442d3626db14452620af23cfc",
+      "state": "uploaded"
+    },
+    {
+      "name": "SHA256SUMS",
+      "id": 717155554,
+      "bytes": 1719,
+      "sha256": "c2344563bd7f28e90b8fd96b3b6ecb264ca323b99912654bf0005ff9366fd2b6",
+      "state": "uploaded"
+    }
+  ],
+  "bytes": 16012574768,
+  "public_download_check": {
+    "status": "PUBLIC_ANONYMOUS_DOWNLOADS_HASH_VERIFIED",
+    "verified_at": "2026-11-06T14:03:15.451481+00:00",
+    "anonymous": true,
+    "assets": [
+      {
+        "name": "AISTpp-reference1363.tar.zst.part-000",
+        "bytes": 701824,
+        "sha256": "b942bd3e8e0f92b210c5924ec7b373192b0f8af6c2cb2164603ab1d4caee3d2b",
+        "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/AISTpp-reference1363.tar.zst.part-000"
+      },
+      {
+        "name": "SHA256SUMS",
+        "bytes": 1719,
+        "sha256": "c2344563bd7f28e90b8fd96b3b6ecb264ca323b99912654bf0005ff9366fd2b6",
+        "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/SHA256SUMS"
+      }
+    ],
+    "scope": "Two small real assets; all20 stored assets independently verified via GitHub SHA256"
+  },
+  "release_url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/tag/motion30-20261106",
+  "sources": 2814,
+  "motion_hand_files": 7450,
+  "scope": "Paired motion publication and transport integrity for AIST++, FineDance, BEAT2. HumanML3D excluded; archived FineDance metrics do not score this exact restored snapshot."
+}

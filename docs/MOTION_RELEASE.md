@@ -2,6 +2,8 @@
 
 Download: [motion30-20261106](https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/tag/motion30-20261106).
 Machine-readable checksums and asset URLs: [release index](../releases/motion30-20261106.json).
+Published2026-11-06; all20 asset sizes/SHA256 and two small anonymous downloads
+were verified. See the [publication receipt](../releases/motion30-20261106.publication.json).
 
 | Dataset | TRAIN | VAL | TEST | Additional | Total |
 |---|---:|---:|---:|---:|---:|
