@@ -1,0 +1,42 @@
+{
+  "status": "SOURCE_CLOCK_BOUNDARY_VERIFIED",
+  "verified_at": "2026-11-06T09:40:30+00:00",
+  "code_sha256": {
+    "contracts.py": "1977650641af8c58db0053379ba6d39f02903dd356ffd56008724903d5e3b42d",
+    "adapters.py": "2e87f9a1fae1eda7810559309b518b58cdf107d3b15d6f55999a862eebe63e22",
+    "aist_smplx.py": "ec94691c4b2f9b046f1e78682e71f49efd69de4a4304e69349993be5c8875208",
+    "test_contracts.py": "bd5144709ffb641190d92244c5042fc02c24f4295dbfa863e53e4a828ab0f358",
+    "test_gt_results.py": "14ee1ec580158517a54c74017baf850d492517b0fb152428aa1fcd825867840b"
+  },
+  "checks": {
+    "evaluation_host_40": {"core": 46, "author_asset": 4, "passed": true},
+    "evaluation_host_91": {"core": 46, "author_asset": 4, "passed": true},
+    "actual_export_clocks_on_91": 146,
+    "finedance_211_origin_s": 22,
+    "conflicting_zero_origin_rejected": true,
+    "clocks_coverage": "Both direct and reconstructed arms: AIST40, FineDance18, BEAT2 speaker2 TEST15"
+  },
+  "finedance_direct_control": {
+    "samples": 18,
+    "expected": 19,
+    "missing_source_ids": ["130"],
+    "protocol": "Unchanged LODGE preprocessing and published202 reference",
+    "paired_gt_fid_k_real": 23.47420888210533,
+    "soma_roundtrip_fid_k_real": 23.474199329254148,
+    "paired_gt_fid_m_real": 12.015831502053338,
+    "soma_roundtrip_fid_m_real": 12.015831502053338,
+    "result_sha256": "a25061eb11f5018cfb270ec3f8c86f6de3e4a01c6ddd06800bef1a62e59464ed",
+    "numerical_complex_residuals": "Preserved in the raw server result; displayed fields are real components",
+    "formal_official_result": false
+  },
+  "archived_statistics_compatibility": "The initial91 check exposed NumPy2 scalar promotion in a frozen HML confidence-interval assertion. The assertion now explicitly reproduces the archive's float32 std followed by float64 scalar arithmetic, with the original tolerance; scorer equations and results are unchanged. The failed log remains preserved.",
+  "source_data_modified": false,
+  "training_modified": false,
+  "gpu_used": false,
+  "limitations": [
+    "FineDance coverage remains18/19, missing130",
+    "This boundary validation does not establish tokenizer quality",
+    "HumanML3D common-time subset scoring was still running at verified_at",
+    "Earlier zero-origin FineDance scores remain archived and are superseded"
+  ]
+}

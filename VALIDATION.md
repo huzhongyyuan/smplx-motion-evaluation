@@ -12,6 +12,27 @@ pins that source and results. This does not validate tokenizer generation.
 
 Existing GT evidence is in `results/`; exact recipe/result hashes are indexed in `results/gt_index.json`. The release does not replace source experiment evidence with unit-test success.
 
+## Source-clock boundary, 2026-11-06
+
+Both evaluation hosts passed46 core and4 author-asset checks with the shared
+clock contract. On91,146 real direct/reconstructed AIST40, FineDance18 and
+BEAT2TEST15 exports were checked. FineDance211 retains source-frame660, or22s;
+declaring0s had applied the official crop twice. The repaired manifest reads
+that recorded clock, and all current adapters reject conflicting origins.
+The native inverse and author scoring equations were unchanged.
+
+Fresh FineDance18 directGT/SOMA-roundtrip FID-k real components are
+23.474208882/23.474199329; FID-m is12.015831502 for both. Complex numerical
+residuals remain in the original result. This is an18/19 paired diagnostic,
+missing130, rather than a complete TEST19 claim. Old incorrect-clock outputs
+remain archived. [Source-clock evidence](results/source_clock_validation.json)
+pins this revision, actual coverage and the fresh result.
+
+The initial91 regression exposed NumPy2 scalar-promotion differences while
+recomputing an archived HML confidence interval. The assertion now explicitly
+reproduces the original float32 standard deviation followed by float64 scalar
+arithmetic, retaining its original tolerance. No scorer formula was changed.
+
 ## Metric diagnostics, 2026-11-03
 
 The evaluation host completed the original36 core checks plus four physical

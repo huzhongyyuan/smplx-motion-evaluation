@@ -11,7 +11,7 @@ import sys
 import numpy as np
 from scipy.spatial.transform import Rotation
 import torch
-from contracts import require, load_smplx, smplx_shape, merge_body_hands, read_manifest, sample_at
+from contracts import require, load_smplx, smplx_shape, merge_body_hands, read_manifest, sample_at, smplx_time_origin
 from evaluator_common import ROOT, UP, setup, write_json, load_file
 from source_lock import sha
 
@@ -100,6 +100,8 @@ def adapt(args):
         shape_encoding = e.get('shape_encoding', 'smplx_betas_only')
         betas, expression = smplx_shape(e['smplx_path'], shape_encoding)
         origin = float(e['time_origin_s']); require(np.isfinite(origin), 'Invalid source clock')
+        require(abs(origin-smplx_time_origin(e['smplx_path'],fps=30,default=origin))<=1e-7,
+                'Export origin conflicts with recorded source clock: '+sid)
         out = args.output/sid
         if args.dataset == 'BEAT2':
             require(e.get('hand_sidecar_path'), 'BEAT2 needs native SMPL-X hand sidecar of the same arm')

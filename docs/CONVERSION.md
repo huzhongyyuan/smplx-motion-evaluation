@@ -6,6 +6,13 @@ source hashes, converter version, FPS, time origin, axes, units and checkpoint.
 Changing the converter requires new exports and a new scoring directory; old
 scores cannot be relabelled.
 
+Preserve the original time origin. For example, an archive with
+`source_frame30=[660,661,...]` starts at22s, not0s. The shared contract reads
+source-frame/timestamp metadata and rejects a conflicting export origin;
+cropped sources must not be shifted again when official preprocessing crops
+the evaluation window. Archives without clock arrays require an explicit
+origin from the caller.
+
 Use the inverse matching the forward producer. The
 [conversion repository](https://github.com/huzhongyyuan/soma-smplx-convert)
 provides an explicit `scripts/convert_native.py` for declared native/global

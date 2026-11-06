@@ -13,7 +13,7 @@ import torch
 sys.path.insert(0,str(Path(__file__).resolve().parent/'compat'))
 from adapters import smplx_neutral
 from aist30 import features,protocol
-from contracts import read_manifest,require,load_smplx
+from contracts import read_manifest,require,load_smplx,smplx_time_origin
 from evaluator_common import ROOT,UP,setup,smpl_male,load_file,write_json
 from source_lock import sha
 from metric_issues import known_issues
@@ -102,6 +102,8 @@ def main():
             e=exports[sid]; require(e['fps']==30 and e['time_origin_s']==0,'Candidate clock mismatch')
             require(sha(e['smplx_path'])==e['smplx_sha256'],'Candidate bytes changed')
             cp,ct,betas=load_smplx(e['smplx_path'],30,body_only=True)
+            require(abs(smplx_time_origin(e['smplx_path'],fps=30,default=e['time_origin_s']))<=1e-7,
+                    'AIST candidate source clock must start at zero')
             require(betas is not None and np.all(np.asarray(betas)==0),'This AIST protocol requires zero shape')
             require(len(cp)>=len(poses),'Incomplete prediction support')
             cj,ce=smplx_positions(model,cp[:len(poses)],ct[:len(poses)])

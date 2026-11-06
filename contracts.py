@@ -101,6 +101,8 @@ def merge_body_hands(converted_path, hand_path, output, dataset, arm, source_id,
                      shape_encoding='smplx_betas_only'):
     require(dataset in DATASETS, 'Unknown dataset')
     poses, trans, betas = load_smplx(converted_path, 30, body_only=True)
+    require(abs(time_origin_s-smplx_time_origin(converted_path,fps=30,default=time_origin_s))<=1e-7,
+            'Hand/body export origin conflicts with recorded source clock')
     betas, expression = smplx_shape(converted_path, shape_encoding)
     if dataset == 'BEAT2':
         require(hand_path is not None, 'BEAT2 requires model/GT native SMPL-X hands; cannot infer full hands from SOMA30')
@@ -125,3 +127,40 @@ def read_manifest(path):
     require(len(set(keys)) == len(keys), 'Duplicate source IDs')
     require(all(x['dataset'] in DATASETS for x in rows), 'Unknown dataset')
     return rows
+
+
+def smplx_time_origin(path, *, fps=None, default=None):
+    """Read the actual source clock; cropped motion must not be reset to zero.
+
+    `default` is the caller's explicit origin for archives without clock fields.
+    Recorded clocks must agree and remain contiguous; they override no fields.
+    """
+    with np.load(path, allow_pickle=False) as z:
+        n=len(z['poses'])
+        rates=[float(z[key]) for key in ('fps','mocap_frame_rate') if key in z.files]
+        if fps is not None: rates.append(float(fps))
+        require(n>0 and (not rates or (np.isfinite(rates).all() and min(rates)>0
+                and max(rates)==min(rates))),'Invalid/conflicting motion FPS')
+        rate=rates[0] if rates else None
+        starts=[]
+        if 'time_origin_s' in z.files:
+            starts.append(float(z['time_origin_s']))
+        for name in ('times_seconds','timestamps','frame_times'):
+            if name not in z.files: continue
+            require(rate is not None,'Explicit FPS required for recorded source clock')
+            clock=np.asarray(z[name],dtype=np.float64)
+            require(clock.shape==(n,) and np.isfinite(clock).all(),'Invalid '+name)
+            require(np.allclose(clock,clock[0]+np.arange(n)/rate,atol=1e-7,rtol=0),
+                    'Noncontiguous source clock: '+name)
+            starts.append(float(clock[0]))
+        if 'source_frame30' in z.files:
+            frames=np.asarray(z['source_frame30'])
+            require(rate==30 and frames.shape==(n,) and frames.dtype.kind in 'iu'
+                    and np.array_equal(frames,frames[0]+np.arange(n)),
+                    'Invalid source_frame30 clock')
+            starts.append(int(frames[0])/30)
+    if not starts:
+        require(default is not None,'Explicit origin required when motion has no source clock')
+        starts=[float(default)]
+    require(np.isfinite(starts).all() and max(starts)-min(starts)<=1e-7,'Conflicting source clocks')
+    return starts[0]

@@ -4,7 +4,7 @@ import tempfile
 import unittest
 import numpy as np
 from scipy.spatial.transform import Rotation
-from contracts import rotations, resample_motion, sample_at, merge_body_hands, smplx_shape
+from contracts import rotations, resample_motion, sample_at, merge_body_hands, smplx_shape, smplx_time_origin
 
 class BoundaryTests(unittest.TestCase):
     def test_shortest_arc_and_linear_world_displacement(self):
@@ -31,6 +31,38 @@ class BoundaryTests(unittest.TestCase):
         r = np.tile(np.eye(3), (31, 1, 1, 1)); t = np.arange(31)[:, None]*np.array([[1., 2., -3.]])/30
         _, out = sample_at(r, t, 30, 22, [22, 22.5, 23])
         np.testing.assert_allclose(out[1], [.5, 1, -1.5])
+
+    def test_cropped_source_clock_and_conflicting_reset_are_detected(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)/'cropped.npz'
+            common=dict(poses=np.zeros((31,165)),trans=np.zeros((31,3)),fps=np.asarray(30.))
+            np.savez(p,**common,source_frame30=np.arange(660,691))
+            self.assertEqual(smplx_time_origin(p,default=0),22.)
+            np.savez(p,**common,source_frame30=np.arange(660,691),time_origin_s=0.)
+            with self.assertRaisesRegex(ValueError,'Conflicting'): smplx_time_origin(p,default=0)
+            np.savez(p,**common,source_frame30=np.arange(660,691),times_seconds=22+np.arange(31)/30)
+            self.assertEqual(smplx_time_origin(p),22.)
+            np.savez(p,**common)
+            with self.assertRaisesRegex(ValueError,'Explicit origin'): smplx_time_origin(p)
+            self.assertEqual(smplx_time_origin(p,default=0),0.)
+
+    def test_source_clock_fps_and_export_preservation(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)/'cropped.npz'
+            common=dict(poses=np.zeros((31,165)),trans=np.zeros((31,3)))
+            np.savez(p,**common,mocap_frame_rate=30,source_frame30=np.arange(660,691))
+            self.assertEqual(smplx_time_origin(p,fps=30),22.)
+            with self.assertRaisesRegex(ValueError,'conflicts'):
+                merge_body_hands(p,None,Path(d)/'wrong.npz','FineDance','generated','211',0)
+            out=Path(d)/'correct.npz'
+            merge_body_hands(p,None,out,'FineDance','generated','211',22)
+            self.assertEqual(smplx_time_origin(out,fps=30),22.)
+            np.savez(p,**common,fps=30,mocap_frame_rate=20)
+            with self.assertRaisesRegex(ValueError,'FPS'): smplx_time_origin(p,default=0)
+            np.savez(p,**common,source_frame30=np.arange(660,691))
+            self.assertEqual(smplx_time_origin(p,fps=30),22.)
+            np.savez(p,**common,fps=30,source_frame30=np.r_[660,662,np.arange(662,691)])
+            with self.assertRaisesRegex(ValueError,'source_frame30'): smplx_time_origin(p)
 
     def test_body_only_fingers_default_wrists_preserved(self):
         with tempfile.TemporaryDirectory() as d:

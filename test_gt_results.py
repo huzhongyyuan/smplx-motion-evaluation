@@ -31,7 +31,9 @@ class GTResultsTests(unittest.TestCase):
                 values = np.asarray([rep[name][branch] for rep in result['repetitions']],
                     dtype=np.float32 if name == 'Diversity' else np.float64)
                 np.testing.assert_allclose(values.mean(axis=0), summary['mean'], atol=1e-12, rtol=0)
-                np.testing.assert_allclose(1.96*values.std(axis=0)/np.sqrt(20),
+                # NumPy1 promoted a float32 scalar std to float64 here. NumPy2
+                # keeps it float32; reproduce the archived arithmetic explicitly.
+                np.testing.assert_allclose(1.96*np.asarray(values.std(axis=0),dtype=np.float64)/np.sqrt(20),
                     summary['confidence_interval_95'], atol=1e-12, rtol=0)
 
     def test_lodge_gt202_is_not_loader_test19(self):
