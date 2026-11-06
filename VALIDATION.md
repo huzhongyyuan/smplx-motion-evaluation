@@ -23,10 +23,41 @@ The native inverse and author scoring equations were unchanged.
 
 Fresh FineDance18 directGT/SOMA-roundtrip FID-k real components are
 23.474208882/23.474199329; FID-m is12.015831502 for both. Complex numerical
-residuals remain in the original result. This is an18/19 paired diagnostic,
-missing130, rather than a complete TEST19 claim. Old incorrect-clock outputs
+residuals remain in the original result. This historical18/19 paired diagnostic
+was missing130; the complete TEST19 supplement below supersedes its coverage limitation. Old incorrect-clock outputs
 remain archived. [Source-clock evidence](results/source_clock_validation.json)
 pins this revision, actual coverage and the fresh result.
+
+## Complete FineDance loader TEST19 on91, 2026-11-06
+
+Verified2026-11-06T10:37:52.902529Z. The missing91 copy of130 was imported from
+the existing40 source:5215frames,30FPS, source-clock0..5214 and original audio,
+all SHA-pinned. Its direct inverse matches native rotations within2.322e−6deg
+and relative root within8.324e−8m. The existing fixed world offset is retained.
+The first continuation failed on a missing-peft environment; that evidence is
+preserved. Reconstruction then ran in its original ardy environment.
+
+Both current arms passed the strict public scorer with all19 frozen loader
+members, the same202-source published reference and unchanged scoring code.
+All38 export clocks/hashes were checked, including211's22s origin. Original
+8138 exports and TRAIN/VAL/selection manifests stayed byte-identical; two
+supplement exports bring the total to8140. Old18-source results remain intact.
+
+| Real metric component | Direct native GT | SOMA→SMPL-X GT | Tokenizer6000 reconstruction |
+|---|---:|---:|---:|
+| FID-k | 23.158303997 | 23.158292788 | 23.346400983 |
+| FID-m | 11.833803850 | 11.833803850 | 12.556096146 |
+| Div-k | 8.241110802 | 8.241111755 | 8.201730728 |
+| Div-m | 6.289283276 | 6.289283276 | 6.250059128 |
+
+The roundtrip FID-k difference is−1.121e−5; FID-m is identical. Full complex
+residuals are retained in the[receipt](results/finedance_test19_supplement91.json).
+Tokenizer FID-k/FID-m increase by0.188097/0.722292; reconstruction is lossy.
+Its root is an external trajectory bypass.130 has no hand sidecar in this
+body-only benchmark. Its audio is copied intact; audio synchronization remains
+unaccepted. This verifies loader TEST19, not the paper's unresolved inference20
+membership or generation quality. NumPy2.2.6/SciPy1.16.2/Torch2.8 scoring values
+are retained separately from historical environment results.
 
 The initial91 regression exposed NumPy2 scalar-promotion differences while
 recomputing an archived HML confidence interval. The assertion now explicitly

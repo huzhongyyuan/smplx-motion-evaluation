@@ -36,6 +36,9 @@ the historical BEAT2 caller retains its own official geometry convention.
 | HumanML3D | Author20FPS/263D, original T2M evaluator,20 repetitions; incomplete source/time coverage labelled separately |
 
 30FPS AIST scores do not become the original SMPL60 paper scores by changing
-the reference pool. FineDance missing130 and an available-source HML subset
-are coverage limitations, not complete official test results. Keep failed runs
+the reference pool.91's FineDance130 copy has been supplemented and both
+current arms passed all19 frozen loader members; see the
+[supplement receipt](../results/finedance_test19_supplement91.json). Its former
+18-source result remains historical. Audio synchronization is a separate check.
+An available-source HML subset remains a coverage limitation. Keep failed runs
 and old reference/mesh-fit results as historical evidence.

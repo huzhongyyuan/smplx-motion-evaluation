@@ -1,0 +1,57 @@
+{
+  "status": "TEST19_SUPPLEMENT_AND_CURRENT_SCORING_VERIFIED",
+  "verified_at": "2026-11-06T10:37:52.902529+00:00",
+  "host": "91",
+  "protocol": "Unchanged LODGE preprocessing/scoring, complete loader TEST19, published202 reference",
+  "samples": 19,
+  "source_ids": ["012", "036", "037", "063", "065", "092", "098", "109", "130", "132", "137", "143", "144", "161", "179", "193", "198", "204", "211"],
+  "source130": {
+    "frames": 5215,
+    "fps": 30,
+    "soma_sha256": "7cc20ae651e1c6a0747f1891c89de5bfae9959a3fd0d8672b3a791603635c41a",
+    "audio_sha256": "053b1af3de28a4f797439fa1d94a5361ac4c64cc4952185d452191cd4dad8f5d",
+    "native_sha256": "bd17a45fa17e9aa63d7f084b419ebab95c11c7017850d8a381d68b347e66237c",
+    "body_joint_rotation_max_deg": 2.3214132901291925e-6,
+    "root_displacement_max_abs_m": 8.323236277973933e-8,
+    "audio_duration_s": 191.0334693877551,
+    "motion_duration_s": 173.83333333333334,
+    "audio_alignment_quality_accepted": false,
+    "train_allowed": false
+  },
+  "metrics": {
+    "direct_native_gt": {
+      "fid_k": {"type": "complex", "real": 23.15830399732323, "imag": -5.504889174353278e-7},
+      "fid_m": {"type": "complex", "real": 11.83380384989752, "imag": -1.4998667311570267e-8},
+      "div_k": 8.241110801696777, "div_m": 6.289283275604248
+    },
+    "soma_roundtrip": {
+      "fid_k": {"type": "complex", "real": 23.158292787919663, "imag": -8.139678846433128e-7},
+      "fid_m": {"type": "complex", "real": 11.83380384989752, "imag": -1.4998667311570267e-8},
+      "div_k": 8.241111755371094, "div_m": 6.289283275604248
+    },
+    "tokenizer6000_reconstruction": {
+      "fid_k": {"type": "complex", "real": 23.34640098293748, "imag": -5.523865155411996e-7},
+      "fid_m": {"type": "complex", "real": 12.556096146450464, "imag": -1.503476260518628e-7},
+      "div_k": 8.201730728149414, "div_m": 6.250059127807617
+    }
+  },
+  "tokenizer_weight_sha256": "a98b9dd1402ae550590d4f7a5860a140e931f272c71817c35a7e4c0ffa8f7caa",
+  "tokenizer_context": {"block_frames": 300, "overlap_frames": 60, "stride_frames": 240},
+  "converter_sha256": "1c425690e4e079ac93fb80fabea6e74bf4bb0db899ba121f191bde85e3196706",
+  "scorer_sha256": "283e3d57597aadef10549cd0b7c7a4a12a7ab9eedb250cf5145373a8349f2e77",
+  "original_exports_byte_verified": 8138,
+  "added_exports": 2,
+  "export_total": 8140,
+  "export_clocks_and_hashes_checked": 38,
+  "train_val_and_selection_manifests_unchanged": true,
+  "root_policy": "Tokenizer external trajectory bypass; fixed producer offset retained",
+  "hands": "Body-only FineDance benchmark; source130 has no hand sidecar",
+  "scoring_environment": {"numpy": "2.2.6", "scipy": "1.16.2", "torch": "2.8.0"},
+  "gpu_used": false,
+  "training_modified": false,
+  "formal_paper_inference_membership_verified": false,
+  "authority": "/data1/guolijie/smplx_4datasets_evaluation_20261105/validation/native_transport_20261106_v2/fd130_20261106/acceptance.json",
+  "authority_sha256": "e01ff477f9b9ffbf751654f7c472a083d161d335d1cd6d45b9a8df75430d9edd",
+  "direct_result_sha256": "3f578f798cb942004a335824ae5edd4fc7827c0a082f9e838a634a8d5272ecf3",
+  "reconstruction_result_sha256": "6773be212515743d468b061c549f26d3a508b0e4d261bd1e3bd3b92c661c55c4"
+}
