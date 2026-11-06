@@ -1,0 +1,12 @@
+{
+  "status": "ALL_ARCHIVED_BYTES_MATCH_VERIFIED_SNAPSHOT",
+  "verified_at": "2026-11-06T12:45:56.986644+00:00",
+  "archives": {
+    "AISTpp": 2001,
+    "FineDance": 623,
+    "BEAT2": 4877,
+    "AISTpp-reference1363": 2727
+  },
+  "motion_files": 7450,
+  "verifier_sha256": "db52e9271345e87d3158177331ad813c70a04294ffb3cf71bf930f1305d1c3bd"
+}
