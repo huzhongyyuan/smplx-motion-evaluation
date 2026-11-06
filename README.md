@@ -4,6 +4,10 @@
 
 完整中文说明：[数据集评测说明.md](数据集评测说明.md)。数据获取：[docs/DATA_ACCESS.md](docs/DATA_ACCESS.md)。第三方条款：[THIRD_PARTY.md](THIRD_PARTY.md)。
 
+三库转换动作快照见[下载与复现](docs/MOTION_RELEASE.md)：AIST++992、FineDance202、BEAT21620，
+每条提供配对SOMA30／SMPL-X30，手保留原生SMPL-X。大文件放在GitHub Release，
+Git只保存构建、下载、校验和评测绑定脚本及索引。HumanML3D未纳入这份动作发布。
+
 **2026-11-03指标修正：** LODGE/Bailando的原版加速度特征存在括号错误；修正版由`evaluate.py corrected-kinetic`进入，两端重新提特征，不能与论文数字或旧GT特征混算。BEAT2已隔离旧L1的数组副作用，并增加未改写动作、对齐阈值索引的BC诊断。原论文兼容结果保留并标注问题。详见[修正说明](docs/METRIC_CORRECTIONS.md)。SOMA往返质量仍须单独验收。
 
 **每个数据集只有一个当前评测协议。** 四套入口与已报告GT一一对应，命令、结果分支、成员名单和结果SHA见[GT脚本索引](docs/GT_RECIPES.md)及机器可读的[gt_index.json](results/gt_index.json)。验证范围见[VALIDATION.md](VALIDATION.md)。表中数值均为GT评测；SOMA/Tokenizer往返另验。旧BEAT2公开版、AIST++的SMPL对照和旧发布回执已归档到[legacy](legacy/README.md)，不参与当前评分或报告。
@@ -51,7 +55,7 @@ python evaluate.py check
 AIST++现用入口必须先准备同一份冻结的SMPL-X30完整1363参考特征：在配置的`links`中加入
 `assets/aist_smplx30_reference1363`→合法取得的本地冻结参考目录。目录须含
 `reference_receipt.json`和两类共2726份特征；成员、时钟、模型域与逐文件SHA均会检查。
-原生SMPL参考、60FPS参考及仅TRAIN952参考会被拒绝。参考数据与原始动作一样不随仓库分发。
+原生SMPL参考、60FPS参考及仅TRAIN952参考会被拒绝。三库动作Release另附同哈希的1363参考特征包。
 
 `configure`校验30,582个源的存在、作者HML263D的SHA和关键资产SHA，生成本机绝对路径manifest；这些本机路径、数据和模型均被Git忽略。配置不修改原始数据。
 
@@ -85,6 +89,6 @@ python evaluate.py gt --dataset BEAT2 --output runs/beat2024_gt15
 
 ## 仓库内容与许可
 
-`metadata/`是源ID、划分、格式和校验信息；`results/`是汇总实测与输入身份；没有原始动作、音频、文字、完整特征数组、人体模型或checkpoint。不能因自有包装代码采用MIT而重新授权这些资产。下载原始数据请走作者渠道。
+`metadata/`是源ID、划分、格式和校验信息；`results/`是汇总实测与输入身份。Git中不存大动作数组；经项目方确认作者授权的三库转换动作和AIST参考特征通过独立Release分发。音频、文字、人体模型和checkpoint仍需走作者渠道。自有代码MIT不重新授权数据。
 
-源代码职责：`evaluate.py gt`固定四库GT配方；`score_worker.py`调用作者打分器；`aist_smplx.py`负责SMPL-X30；`lodge_gt.py`核对LODGE202池并调用原指标；`beat2024.py`固定历史调用顺序；`adapters.py`/`contracts.py`处理输入契约；锁文件固定作者版本与资产。未提供SOMA↔SMPL-X转换器。
+源代码职责：`evaluate.py gt`固定四库GT配方；`score_worker.py`调用作者打分器；`aist_smplx.py`负责SMPL-X30；`lodge_gt.py`核对LODGE202池并调用原指标；`beat2024.py`固定历史调用顺序；`adapters.py`/`contracts.py`处理输入契约；锁文件固定作者版本与资产。匹配的SOMA↔SMPL-X转换器见[独立转换仓库](https://github.com/huzhongyyuan/soma-smplx-convert)，动作快照内另附所用源代码和哈希。

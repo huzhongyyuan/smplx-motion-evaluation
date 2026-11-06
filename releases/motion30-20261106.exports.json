@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "verified_at": "2026-11-06T12:39:04.982080+00:00",
+  "export_sources": {
+    "AISTpp": 40,
+    "FineDance": 19,
+    "BEAT2": 15
+  },
+  "beat_hand_merges": 15,
+  "source_origins_s": {
+    "FineDance211": 0.0
+  },
+  "contracts_sha256": "1977650641af8c58db0053379ba6d39f02903dd356ffd56008724903d5e3b42d",
+  "verification_sha256": "b6ecee7b9d72a551aacd8e0fa6756b3c9e5a16b6bada8c8f24544e04335bd9cd"
+}

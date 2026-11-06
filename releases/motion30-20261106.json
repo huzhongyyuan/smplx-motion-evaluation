@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "release_tag": "motion30-20261106",
+  "repo": "huzhongyyuan/smplx-motion-evaluation",
+  "sources": 2814,
+  "files": 7450,
+  "counts": {
+    "AIST++": {
+      "train": 952,
+      "val": 20,
+      "test": 20
+    },
+    "FineDance": {
+      "train": 183,
+      "test": 19
+    },
+    "BEAT2": {
+      "train": 1093,
+      "val": 106,
+      "test": 265,
+      "additional": 156
+    }
+  },
+  "acceptance_sha256": "1b30ccdff63464b938619fd0bf16bf769a065bd807d5989d8f1955d021a85c80",
+  "manifest_sha256": "957ed89daf484c69078fb5dd375ca1e85ebd79848f0c4f2841bec4facc09a071",
+  "archive_verification_sha256": "b985e1c767493d9cbec2a3929acb125eec5266ee968c6bab9168b6028075b41a",
+  "packaged_at": "2026-11-06T12:43:28.025539+00:00",
+  "assets": [
+    {
+      "name": "AISTpp-reference1363.tar.zst.part-000",
+      "bytes": 701824,
+      "sha256": "b942bd3e8e0f92b210c5924ec7b373192b0f8af6c2cb2164603ab1d4caee3d2b",
+      "dataset": "AISTpp",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/AISTpp-reference1363.tar.zst.part-000"
+    },
+    {
+      "name": "AISTpp.tar.zst.part-000",
+      "bytes": 528455957,
+      "sha256": "aa94e07bae4b4327ab728e95b438402196044e5895291ced34206677ecf40c87",
+      "dataset": "AISTpp",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/AISTpp.tar.zst.part-000"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-000",
+      "bytes": 1000000000,
+      "sha256": "fcc093e2363918dfb3746fc1868eba821a17e77c06e45b0f90b74ff80dde0eed",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-000"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-001",
+      "bytes": 1000000000,
+      "sha256": "f063d5a0968ac6720ad055c9462e812b2511f8f2e1cb6f184219025b56ff357b",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-001"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-002",
+      "bytes": 1000000000,
+      "sha256": "5711e454cee156b96e2505351da25b96af9799833a28fbeff279ddaa223bb55b",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-002"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-003",
+      "bytes": 1000000000,
+      "sha256": "d0e780b4fe02efeda1c8389335e4a7b124b02b7f1b7bc6daf08de44e33cbaad3",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-003"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-004",
+      "bytes": 1000000000,
+      "sha256": "ddf39d3921fd2f1986dad103ca8fe07c400b05bfefb4eba1e6c4ea579c0cf430",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-004"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-005",
+      "bytes": 1000000000,
+      "sha256": "abd88cc292dd0310080be9394ac700795ac412b0d7d9af112936f3771bcbcdab",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-005"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-006",
+      "bytes": 1000000000,
+      "sha256": "4bd5258bb275d3eb089aa111bf2e8c23862161948fa15dc4e4078b8c918a4114",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-006"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-007",
+      "bytes": 1000000000,
+      "sha256": "8251f60eca07c6e3381acf48b697e5d20b6e0c3229605ef356c689ef75860308",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-007"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-008",
+      "bytes": 1000000000,
+      "sha256": "0dc49b76849444f07261460ccfc2fa2a2eb6e91a75801d4ce63a2f7065d30395",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-008"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-009",
+      "bytes": 1000000000,
+      "sha256": "94cd9ae1641711b97f9749d74cdf8fadc130865a31dd5f51b25c22008506b87a",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-009"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-010",
+      "bytes": 1000000000,
+      "sha256": "b02b18fbcea72c2d68dc5ac9312615c30ad6b872e83ba3c88544dfa1e9a47114",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-010"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-011",
+      "bytes": 1000000000,
+      "sha256": "9f09e6e3f3eb3fbaca50c45eb1eddaaa35987dff071d9c4b02087bea63486670",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-011"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-012",
+      "bytes": 1000000000,
+      "sha256": "9dca7945abae2a0b2971f6d02e1e9414ded6bec727a009dcf97142a9f7e43066",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-012"
+    },
+    {
+      "name": "BEAT2.tar.zst.part-013",
+      "bytes": 195714961,
+      "sha256": "7d00857f2835d7cf5008542b72068cdb9d73fea57c6f312e3b76e2d2d5651072",
+      "dataset": "BEAT2",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/BEAT2.tar.zst.part-013"
+    },
+    {
+      "name": "FineDance.tar.zst.part-000",
+      "bytes": 1000000000,
+      "sha256": "08108747b536fab66c3387eb298384723538ce2544f415268427b81b7e61fe7f",
+      "dataset": "FineDance",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/FineDance.tar.zst.part-000"
+    },
+    {
+      "name": "FineDance.tar.zst.part-001",
+      "bytes": 1000000000,
+      "sha256": "20e628453031108ca0baa2ae3600ae3b5d0471e0db29479b9e9a88c5e85a9a94",
+      "dataset": "FineDance",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/FineDance.tar.zst.part-001"
+    },
+    {
+      "name": "FineDance.tar.zst.part-002",
+      "bytes": 287700307,
+      "sha256": "fce5cb1fd2b293f3d9e85df9e91a02d87a259f7442d3626db14452620af23cfc",
+      "dataset": "FineDance",
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/FineDance.tar.zst.part-002"
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 1719,
+      "sha256": "c2344563bd7f28e90b8fd96b3b6ecb264ca323b99912654bf0005ff9366fd2b6",
+      "dataset": null,
+      "url": "https://github.com/huzhongyyuan/smplx-motion-evaluation/releases/download/motion30-20261106/SHA256SUMS"
+    }
+  ],
+  "motion_scope": "Body at30FPS; native SMPL-X fingers retained; official roles preserved",
+  "converter_repository": "https://github.com/huzhongyyuan/soma-smplx-convert",
+  "converter_commit": "dbb4014db7a80068e1b2d8cd13b6f4b15d335bbd",
+  "metric_scope": "Archived AIST40/full1363, FineDance19/ref202, BEAT2 speaker2 TEST15; archived91 FineDance211 starts at22s, restored release211 starts at0s. Archived FineDance scores do not score this exact restored snapshot.",
+  "excluded": [
+    "HumanML3D",
+    "audio",
+    "text",
+    "learned features",
+    "body models",
+    "meshes",
+    "weights"
+  ]
+}

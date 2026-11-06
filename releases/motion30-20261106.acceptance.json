@@ -1,0 +1,58 @@
+{
+  "id": "HS-THREE-MOTION-20261106",
+  "started_at": "2026-11-06T12:21:30.096765+00:00",
+  "pid": 193505,
+  "cpu_limit": 2,
+  "gpu": false,
+  "unified_manifest_sha256": "c1b8ea6123763efb9a0cc4ae066352af538196a0f177efe998146c423ce52d95",
+  "native_manifest_sha256": "8bc2974a687d1933e9329c469df464a2e11769562d719f2589d99deeaca0630e",
+  "beat_split_csv_sha256": "ae51afcfb0df44cbc1730f52789918579efd499c7e15ed6a159a1a34e0332baa",
+  "converter_version": "native-transport-inverse-v1",
+  "converter_sha256": "1c425690e4e079ac93fb80fabea6e74bf4bb0db899ba121f191bde85e3196706",
+  "builder_sha256": "bbd4e17077f642a5e66e8741016dc8cab825c3d94357d8e15e34ac345212bc85",
+  "restore_report_sha256": "ca1d9b78e48e6fa132dd26ec3c91c46d4e010fe493d96668ccab3d4381902457",
+  "restore_builder_sha256": "1156eba39acf4cab8987283726a679366061ed963ac2199bac123d229f071aa9",
+  "publication_authorization": "Project owner explicitly confirmed written author permissions for all three datasets in this chat, 2026-11-06",
+  "diagnostic": false,
+  "scope": "motion only; no audio, text, model assets, meshes or learned features",
+  "status": "FULL_SOURCE_TRANSPORT_INTEGRITY_VERIFIED",
+  "completed_at": "2026-11-06T12:30:49.553448+00:00",
+  "completed": 2814,
+  "datasets": {
+    "AIST++": {
+      "sources": 992,
+      "frames": 412754,
+      "native_body_rotation_max_degrees": 4.343156884266957e-06,
+      "native_root_offset_variation_max_m": 1.1920928955078125e-07
+    },
+    "FineDance": {
+      "sources": 202,
+      "frames": 804300,
+      "native_body_rotation_max_degrees": 4.179922578382673e-06,
+      "native_root_offset_variation_max_m": 3.533684678671406e-07
+    },
+    "BEAT2": {
+      "sources": 1620,
+      "frames": 5738337,
+      "native_body_rotation_max_degrees": 4.006198482423689e-06,
+      "native_root_offset_variation_max_m": 1.1920928932873665e-07
+    }
+  },
+  "manifest_sha256": "957ed89daf484c69078fb5dd375ca1e85ebd79848f0c4f2841bec4facc09a071",
+  "metadata_corrected_sources": [
+    {
+      "dataset": "FineDance",
+      "source_id": "148",
+      "source_soma_sha256": "b4d6a7ec0e10e6d25692cf156afc38a20c03012fd5abb7ceb8f086f40e798af0",
+      "soma_sha256": "1bedfc0f292160c0108f049a93be4f855976d9ca6633e0bf906c6d404ba0cfff",
+      "correction": {
+        "field": "estimated_frame",
+        "original_flagged_frames": 1,
+        "actual_body_rotation_error_max_degrees": 2.045576050879644e-06,
+        "reason": "Native-equivalent frame; historical flag retained in original_estimated_frame; no motion values changed"
+      }
+    }
+  ],
+  "reused_sources": 2751,
+  "quality_scope": "Rotation/root/clock/hands/inverse integrity; aggregate scoring covers AIST40, FineDance19, BEAT speaker2 TEST15 only; condition synchronization and mesh quality not inferred"
+}

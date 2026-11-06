@@ -1,6 +1,12 @@
 # Obtain datasets and assets
 
-No raw dataset is redistributed in this repository. Public metadata in `metadata/` identifies the required sources and preserves official roles.
+No raw author archive is stored in Git. A separately authorised three-dataset
+converted-motion snapshot is distributed through GitHub Release; see
+[motion download and verification](MOTION_RELEASE.md). It contains paired
+SOMA30/SMPL-X30 motion and native SMPL-X finger parameters, not source audio,
+text, body-model files or weights. Public metadata in `metadata/` identifies
+the original sources and preserves official roles. Author assets below remain
+necessary for the frozen benchmark adapters and scorers.
 
 1. **HumanML3D**: follow [the authors' instructions](https://github.com/EricGuo5513/HumanML3D) for `new_joint_vecs` and `texts`. Use the exact author20fps263D values, not previously fitted SMPL/SMPL-X. `metadata/members.jsonl` pins all27,924 admitted source hashes. Obtain the T2M epoch28 matching evaluator from [the T2M README](https://github.com/EricGuo5513/text-to-motion); the verified author archive ID is `1IgrFCnxeg4olBtURUHimzS03ZI0df_6W`. Do not substitute a different public evaluator because it has the same filename. T2M GloVe assets are also obtained from that README.
 2. **AIST++**: obtain official motion pickles, split and ignore files from [AIST++](https://google.github.io/aistplusplus_dataset/). The wrapper consumes native60fps SMPL parameters and samples every other frame to produce30fps, with official SMPL and SMPL-X assets. It does not require interpolated60fps predictions for scoring.
